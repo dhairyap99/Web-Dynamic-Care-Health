@@ -50,7 +50,7 @@ String h,w,a,s,u;
 	
 	.grid-container1 {
 		display: grid;
-		grid-template-columns: 400px 400px;
+		grid-template-columns: 321px 321px 321px 321px;
 		grid-template-rows: auto;
 		grid-gap: 10px;
 		padding: 10px;
@@ -102,7 +102,8 @@ String h,w,a,s,u;
 	.menu-block{
 		position: absolute;
 		top: 70%;
-		left:19%;
+		left:1%;
+		margin-right:1%
 	}
 	.profile{
 		width: 20%;
@@ -145,12 +146,12 @@ catch(Exception e){
 
 <div id="userdetails">
 	<center>
-		<% if (s.equals("Male")){ 
+		<%-- if (s.equals("Male")){ 
 			out.println("<img src='images/profileMale.png' class='profile'/>");
 		}
 		else{
 			out.println("<img src='images/profileFemale.png' class='profile'/>");
-		}%>
+		}--%>
 		<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User Details</h2>
 		<table style="font-family:verdana;" cellpadding="6">
 			<tr>
@@ -187,7 +188,7 @@ catch(Exception e){
 						<div>
 							<a href="Details.jsp" style="color:red;">
 								<img class="icons" src="images/details.png"><hr>
-							Complete Details</a>						
+							View Details</a>						
 						</div>
 						
 						<div>
@@ -195,8 +196,25 @@ catch(Exception e){
 								<img class="icons" src="images/contacts.png"><hr>
 							Emergency Contacts</a>			
 						</div>			
+						
+						<div>
+							<a href="Appointment.jsp" style="color:red;">
+								<img class="icons" src="images/appointment.png"><hr>
+							Book Appointment</a>			
+						</div>			
+						
+						
+						<div>
+							<a href="Payments.jsp" style="color:red;">
+								<img class="icons" src="images/wallet.png"><hr>
+							Payments</a>			
+						</div>			
 					</div>
 				</div>
 			</center>
+			
+			<%
+			session.setAttribute("user",u);
+			%>
 </body>
 </html>
