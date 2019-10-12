@@ -5,7 +5,7 @@
 pageEncoding="ISO-8859-1" import="java.sql.*"%>
 <%!Connection con;
 Statement st;
-String pname,ht,wt,sex,age,ph,fhis,alhis,mil,ename1,ename2,eph1,eph2,rel1,rel2;
+String pname,sex,age,ph,edu,exp,spec,loc;
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -124,27 +124,17 @@ String pname,ht,wt,sex,age,ph,fhis,alhis,mil,ename1,ename2,eph1,eph2,rel1,rel2;
 	st=con.createStatement();
 
 	pname=request.getParameter("user");
-	ht=request.getParameter("ht");
-	wt=request.getParameter("wt");
 	sex=request.getParameter("sex");
 	age=request.getParameter("age");
 	ph=request.getParameter("ph");
-	fhis=request.getParameter("fhist");
-	alhis=request.getParameter("alhist");
-	mil=request.getParameter("mil");
-	ename1=request.getParameter("ename1");
-	ename2=request.getParameter("ename2");
-	eph1=request.getParameter("eph1");
-	eph2=request.getParameter("eph2");
-	rel1=request.getParameter("rel1");
-	rel2=request.getParameter("rel2");
+	edu=request.getParameter("edu");
+	spec=request.getParameter("spec");
+	loc=request.getParameter("loc");
+	exp=request.getParameter("exp");
 
 
-	int row=st.executeUpdate("insert into patientdetails values('"+pname+"','"+ht+"','"+wt+"','"+sex+"','"+age+"','"+ph+"','"+fhis+"','"
-	+alhis+"','"+mil+"')");
-
-	int row1=st.executeUpdate("insert into patientcontacts values('"+pname+"','"+ename1+"','"+eph1+"','"+rel1+"','"+ename2+"','"+eph2+"','"
-			+rel2+"')");
+	int row=st.executeUpdate("insert into doctordetails values('"+pname+"','"+sex+"','"+age+"','"+ph+"','"+edu+"','"+spec+"','"+loc+"','"
+	+exp+"')");
 			
 	st.close();
 
@@ -182,13 +172,13 @@ e.printStackTrace(response.getWriter());
 				</tr>
 				
 				<tr>
-					<td><b>Height: </b>
-						<td><%= ht %></td>
+					<td><b>Phone: </b>
+						<td><%= ph %></td>
 					</tr>
 					
 					<tr>
-						<td><b>Weight: </b>
-							<td><%= wt %></td>
+						<td><b>Specification: </b>
+							<td><%= spec %></td>
 						</tr>
 					</table>
 				</center>

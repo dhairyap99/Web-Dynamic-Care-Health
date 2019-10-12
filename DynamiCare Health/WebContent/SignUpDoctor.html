@@ -17,16 +17,13 @@
 		<div class="container register">
 			<div class="row">
 				<div class="col-md-4 register-left">
-
 					<img src="images/s_cross.png" align="center" alt="cross">
-
-
 				</div>
 				<div class="col-md-8 register-right">
 					<ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
 						<li class="nav-item"><a class="nav-link"
-							id="patient-tab" data-toggle="tab" href="SignUpPatient.html" role="tab"
-							aria-controls="home" aria-selected="true">Patient</a></li>
+							id="patient-tab" data-toggle="tab" href="SignUpPatient.html"
+							role="tab" aria-controls="home" aria-selected="true">Patient</a></li>
 						<li class="nav-item"><a class="nav-link active" id="doctor-tab"
 							data-toggle="tab" href="SignUpDoctor.html" role="tab"
 							aria-controls="profile" aria-selected="false">Doctor</a></li>
@@ -36,40 +33,42 @@
 							aria-labelledby="patient-tab">
 							<h3 class="register-heading">Sign Up as a Doctor</h3>
 
-							<form class="row register-form">
+							<form class="row register-form" action="Doctor1.jsp"
+								method="get">
 								<div class="col-md-6">
 
 									<div class="form-group">
 										<input type="text" class="form-control"
-											placeholder="First Name" value="" name="fname"/>
+											placeholder="First Name" value="" name="fname" tabindex="1"/>
 									</div>
 									<div class="form-group">
-										<input type="text" class="form-control"
-											placeholder="Email Id" value="" name="mail"/>
+										<input type="email" class="form-control"
+											placeholder="Email Id" value="" name="mail" tabindex="3"/>
 									</div>
 									<div class="form-group">
 										<input type="password" class="form-control"
-											placeholder="Password" value="" name="pwd"/>
+											placeholder="Password" value="" name="pwd" tabindex="5"/>
 									</div>
-									
+
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-										<input type="email" class="form-control"
-											placeholder="Last Name" value="" name="lname"/>
+										<input type="text" class="form-control"
+											placeholder="Last Name" value="" name="lname" tabindex="2"/>
 									</div>
 									<div class="form-group">
 										<input type="text" class="form-control"
-											placeholder="User Name" value="" name="uname"/>
+											placeholder="User Name" value="" name="uname" tabindex="4"/>
 									</div>
-									
+
 									<div class="form-group">
-										<input type="text" class="form-control" placeholder="Confirm Password" value="" name="cpwd"/>
+										<input type="password" class="form-control"
+											placeholder="Confirm Password" value="" name="cpwd" tabindex="6"/>
 									</div>
-									
+
 								</div>
-								
-									<input type="submit" class="btnRegister" value="Register" />
+
+								<input type="submit" class="btnRegister" value="Register" tabindex="7"/>
 							</form>
 						</div>
 					</div>
