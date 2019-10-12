@@ -84,7 +84,7 @@ td {
 		+"patientdetails.phone, patientdetails.famhis,patientdetails.alhis,patientdetails.majil,users.fname,users.lname "
 		+"FROM patientdetails INNER JOIN users "
 		+"ON patientdetails.username = users.uname "
-		+"WHERE patientdetails.username='rkasale28'");
+		+"WHERE patientdetails.username='"+username+"'");
 		
 		while(rs.next())
 		{

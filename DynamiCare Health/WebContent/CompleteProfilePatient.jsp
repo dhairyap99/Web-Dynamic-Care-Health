@@ -20,12 +20,13 @@
 		border-top-left-radius:30px;		
 		border-top-right-radius:30px;
 	}
-	.left{
+	.left{	
+	color: #eb1736;
 		background: white;
 		position: absolute;
 		left:0.6%;
 		width: 49%;
-		height:63%;
+		height:80%;
 		padding-left: 1%;
 		border-right: 2.5px dashed white;
 		border-bottom-left-radius:30px;
@@ -36,7 +37,7 @@
 		position: absolute;
 		left: 50.8%;
 		width: 47.4%;
-		height: 63%;
+		height: 80%;
 		padding-left: 1%;
 		border-left: 2.5px dashed #eb1736;
 		border-bottom-right-radius:30px;
@@ -44,10 +45,11 @@
 
 	.centered{
 		position: absolute;
-		top:83.5%;
+		top:102.5%;
 		left:0.6%;
 		height: 8%;
 		width: 98.7%;
+		margin-bottom: 16px;
 	}
 	.submit{
 		background: #101357;
@@ -78,6 +80,8 @@
 		<form action = "Patient2.jsp" method="get" autocomplete = "on">
 			<div class="left">
 				<table cellpadding="6">
+				
+				<h2>Details</h2>
 					<tr>
 						<td>User Name:</td>
 						<td><input type="text" name="user" size="40" value="<%= request.getParameter("uname")%>"  readonly="readonly" 
@@ -114,6 +118,8 @@
 					</tr>
 				</table>
 				<hr>
+				
+				<h2>History</h2>
 				<table cellpadding="6">
 					<tr>
 						<td>Family History:</td>         
