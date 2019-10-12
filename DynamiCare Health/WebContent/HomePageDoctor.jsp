@@ -186,18 +186,22 @@ catch(Exception e){
 				<div class="menu-block">
 					<div class="grid-container1">
 						<div>
-							<a href="Details.jsp" style="color:red;">
+							<a href="DetailsDoc.jsp" style="color:red;">
 								<img class="icons" src="images/details.png"><hr>
-							Complete Details</a>						
+							View Details</a>						
 						</div>
 						
 						<div>
-							<a href="Emergency.jsp" style="color:red;">
-								<img class="icons" src="images/contacts.png"><hr>
-							Emergency Contacts</a>			
+							<a href="AppointmentDoc.jsp" style="color:red;">
+								<img class="icons" src="images/appointment.png"><hr>
+							Schedule Appointment</a>			
 						</div>			
 					</div>
 				</div>
 			</center>
+			
+			<%
+			session.setAttribute("user",us);
+			%>
 			</body>
 			</html>

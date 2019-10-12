@@ -14,7 +14,7 @@ float weight,height,bmi;
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Emergency Contacts</title>
+<title>Details</title>
 <style>
 body {
 	background: #5252d4;
@@ -26,7 +26,7 @@ body {
 	position: absolute;
 	left: 0.6%;
 	width: 49%;
-	height: 350px;
+	height: 200px;
 	padding-left: 1%;
 	border-right: 2.5px dashed white;
 	border-bottom-left-radius: 30px;
@@ -41,7 +41,7 @@ body {
 	position: absolute;
 	left: 50.8%;
 	width: 47.4%;
-	height: 350px;
+	height: 200px;
 	padding-left: 1%;
 	border-left: 2.5px dashed #eb1736;
 	border-bottom-right-radius: 30px;
@@ -69,9 +69,10 @@ td {
 </head>
 <body>
 	<div class="title">
-		<h2 style="font-family: Verdana">Emergency Contacts</h2>
+		<h2 style="font-family: Verdana">Complete Details</h2>
 		<hr>
 	</div>
+
 	<%
 		String username=(String)session.getAttribute("user");
 		
@@ -79,14 +80,13 @@ td {
 		Class.forName("com.mysql.jdbc.Driver");
 		con=DriverManager.getConnection("jdbc:mysql://localhost/dchealth?serverTimezone=UTC","root","");
 		st=con.createStatement();
-		rs=st.executeQuery("SELECT patientcontacts.ename1, patientcontacts.ename2, "
-				+"patientcontacts.eph1, patientcontacts.eph2, "
-				+"patientcontacts.erel1, patientcontacts.erel2, "
-				+"users.fname,users.lname, "
-				+"patientdetails.phone "
-				+"FROM patientcontacts INNER JOIN users INNER JOIN patientdetails "
-				+"ON patientcontacts.username = users.uname AND patientcontacts.username = patientdetails.username "
-				+"WHERE patientcontacts.username='"+username+"'");
+		rs=st.executeQuery("SELECT doctordetails.sex,doctordetails.age,doctordetails.phone, "
+				+"doctordetails.education, doctordetails.specification, doctordetails.location, doctordetails.experience,"
+				+"users.fname, users.lname "
+				+"FROM `doctordetails` "
+				+"INNER JOIN `users` "
+				+"ON doctordetails.username=users.uname "
+				+"WHERE doctordetails.username='"+username+"'");
 		
 		while(rs.next())
 		{
@@ -94,61 +94,56 @@ td {
 			out.println("<table cellpadding='6'>");
 				out.println("<tr>");
 					out.println("<td><b>Name: </b></td>");
-					out.println("<td>"+rs.getString(7)+" "+rs.getString(8)+"</td>");
+					out.println("<td>"+rs.getString(8)+" "+rs.getString(9)+"</td>");
 				out.println("</tr>");
-			
-			out.println("<tr>");
-				out.println("<td><b>Phone No.: </b></td>");
-				out.println("<td>"+rs.getString(9)+"</td>");
-			out.println("</tr>");
-			out.println("</table>");
-			
-			out.println("<hr>");
-			out.println("<h2>Emergency Contact No. 1</h2>");
-			out.println("<table cellpadding='6'>");
-			out.println("<tr>");
-				out.println("<td><b>Name: </b></td>");
-				out.println("<td>"+rs.getString(1)+"</td>");
-			out.println("</tr>");
-			
-			out.println("<tr>");
-				out.println("<td><b>Phone No.: </b></td>");
-				out.println("<td>"+rs.getString(3)+"</td>");
-			out.println("</tr>");		
-
-			out.println("<tr>");
-				out.println("<td><b>Relation: </b></td>");
-				out.println("<td>"+rs.getString(5)+"</td>");
-			out.println("</tr>");	
-			out.println("</table>");
-			out.println("</div>");
-			
-			out.println("<div class='right'>");
-
-			out.println("<h2>Emergency Contact No. 2</h2>");
-			out.println("<table cellpadding='6'>");				
-			out.println("<tr>");
-				out.println("<td><b>Name: </b></td>");
+				
+				out.println("<tr>");
+					out.println("<td><b>Sex: </b></td>");
+					out.println("<td>"+rs.getString(1)+"</td>");
+				out.println("</tr>");
+				
+				out.println("<tr>");
+				out.println("<td><b>Age: </b></td>");
 				out.println("<td>"+rs.getString(2)+"</td>");
 			out.println("</tr>");
 			
 			out.println("<tr>");
 				out.println("<td><b>Phone No.: </b></td>");
-				out.println("<td>"+rs.getString(4)+"</td>");
-			out.println("</tr>");
-			
-
-			out.println("<tr>");
-				out.println("<td><b>Relation: </b></td>");
-				out.println("<td>"+rs.getString(6)+"</td>");
-			out.println("</tr>");	
-		out.println("</table>");
-		out.println("</div>");
+				out.println("<td>"+rs.getString(3)+"</td>");
+			out.println("</tr>");			
+				out.println("</table>");
+				out.println("</div>");
+				
+				out.println("<div class='right'>");
+				out.println("<table cellpadding='6'>");
+				out.println("<tr>");
+					out.println("<td><b>Education: </b></td>");
+					out.println("<td>"+rs.getString(4)+"</td>");
+				out.println("</tr>");
+				
+				out.println("<tr>");
+					out.println("<td><b>Specification: </b></td>");
+					out.println("<td>"+rs.getString(5)+"</td>");
+				out.println("</tr>");
+				
+				out.println("<tr>");
+					out.println("<td><b>Experience: </b></td>");
+					out.println("<td>"+rs.getString(7)+"</td>");
+				out.println("</tr>");
+				
+				out.println("<tr>");
+					out.println("<td><b>Location: </b></td>");
+					out.println("<td>"+rs.getString(6)+"</td>");
+				out.println("</tr>");
+				
+			out.println("</table>");
+			out.println("</div>");
 		}
 	}
 	catch(Exception e){
 	out.println(e);
 }
 %>
+
 </body>
 </html>

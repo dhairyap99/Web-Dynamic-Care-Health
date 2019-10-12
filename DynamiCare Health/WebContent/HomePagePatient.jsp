@@ -186,7 +186,7 @@ catch(Exception e){
 				<div class="menu-block">
 					<div class="grid-container1">
 						<div>
-							<a href="Details.jsp" style="color:red;">
+							<a href="DetailsPat.jsp" style="color:red;">
 								<img class="icons" src="images/details.png"><hr>
 							View Details</a>						
 						</div>
@@ -198,7 +198,7 @@ catch(Exception e){
 						</div>			
 						
 						<div>
-							<a href="Appointment.jsp" style="color:red;">
+							<a href="AppointmentPat.jsp" style="color:red;">
 								<img class="icons" src="images/appointment.png"><hr>
 							Book Appointment</a>			
 						</div>			
