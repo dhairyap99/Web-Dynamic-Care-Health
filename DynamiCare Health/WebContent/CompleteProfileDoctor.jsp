@@ -80,7 +80,6 @@
 							<select name="sex">
 								<option>Male</option>
 								<option>Female</option>
-								<option>Others</option>
 							</select>
 						</td>
 					</tr>

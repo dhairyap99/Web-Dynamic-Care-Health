@@ -145,7 +145,12 @@ catch(Exception e){
 
 <div id="userdetails">
 	<center>
-		<img src="images/profile.png" class="profile"/>
+		<% if (s.equals("Male")){ 
+			out.println("<img src='images/profileMale.png' class='profile'/>");
+		}
+		else{
+			out.println("<img src='images/profileFemale.png' class='profile'/>");
+		}%>
 		<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User Details</h2>
 		<table style="font-family:verdana;" cellpadding="6">
 			<tr>
