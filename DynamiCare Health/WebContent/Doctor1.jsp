@@ -68,12 +68,19 @@ try{
 		int row=st.executeUpdate("insert into users values('"+first+"','"+last+"','"+email+"','"+user+"','"+pass+"','Doctor')");%>
 		<%@ include file="CompleteProfileDoctor.jsp"%>    
 <%}
-	else{out.println("Passwords Don't Match");}
+	else{
+		String redirectURL = "/DynamiCare_Health/SignUpDoctor.jsp";
+		session.setAttribute("msg","Passwords don't match");
+	    response.sendRedirect(redirectURL);
+	}
 	st.close();
 	con.close();	
 }
 catch(java.sql.SQLIntegrityConstraintViolationException exp){
-	out.println("User name already exists");
+
+	String redirectURL = "/DynamiCare_Health/SignUpDoctor.jsp";
+	session.setAttribute("msg","User name already exists");
+    response.sendRedirect(redirectURL);
 }
 catch(Exception e){
 	e.printStackTrace(response.getWriter());

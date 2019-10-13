@@ -68,10 +68,19 @@
 		color: #eb1736;
 		font-weight: bold;
 	}
-
+	
+	img{
+		width:60px;
+		position:absolute;
+		right:20px;
+		top:15px;
+	}
 </style>
 </head>
 <body>
+<%
+request.setAttribute("username",request.getParameter("uname"));
+%>
 <div class="title">
 		<h2 style="font-family: Verdana">Build Profile</h2>
 		<hr>

@@ -7,11 +7,14 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 <link rel="stylesheet" type="text/css" href="SignUpPage.css">
 <title>Sign Up</title>
 </head>
 <body>
+	<%
+	String message=session.getAttribute("msg").toString();
+	out.println("<script>alert(\""+message+"\")</script>");
+	%>
 	<div class="wrapper"
 		style="background-image: url('images/bg_registration.jpg');">
 
@@ -22,49 +25,49 @@
 				</div>
 				<div class="col-md-8 register-right">
 					<ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-						<li class="nav-item"><a class="nav-link active"
+						<li class="nav-item"><a class="nav-link"
 							id="patient-tab" data-toggle="tab" href="SignUpPatient.html"
 							role="tab" aria-controls="home" aria-selected="true">Patient</a></li>
-						<li class="nav-item"><a class="nav-link" id="doctor-tab"
+						<li class="nav-item"><a class="nav-link active" id="doctor-tab"
 							data-toggle="tab" href="SignUpDoctor.html" role="tab"
 							aria-controls="profile" aria-selected="false">Doctor</a></li>
 					</ul>
 					<div class="tab-content" id="myTabContent">
 						<div class="tab-pane fade show active" id="home" role="tabpanel"
 							aria-labelledby="patient-tab">
-							<h3 class="register-heading">Sign Up as a Patient</h3>
+							<h3 class="register-heading">Sign Up as a Doctor</h3>
 
-							<form class="row register-form" action="Patient1.jsp"
+							<form class="row register-form" action="Doctor1.jsp"
 								method="get">
 								<div class="col-md-6">
 
 									<div class="form-group">
 										<input type="text" class="form-control"
-											placeholder="First Name" value="" name="fname" tabindex="1" required="required"/>
+											placeholder="First Name" value="" name="fname" tabindex="1"/>
 									</div>
 									<div class="form-group">
 										<input type="email" class="form-control"
-											placeholder="Email Id" value="" name="mail" tabindex="3" required="required"/>
+											placeholder="Email Id" value="" name="mail" tabindex="3"/>
 									</div>
 									<div class="form-group">
 										<input type="password" class="form-control"
-											placeholder="Password" value="" name="pwd" tabindex="5" required="required"/>
+											placeholder="Password" value="" name="pwd" tabindex="5"/>
 									</div>
 
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
 										<input type="text" class="form-control"
-											placeholder="Last Name" value="" name="lname" tabindex="2" required="required"/>
+											placeholder="Last Name" value="" name="lname" tabindex="2"/>
 									</div>
 									<div class="form-group">
 										<input type="text" class="form-control"
-											placeholder="User Name" value="" name="uname" tabindex="4" required="required"/>
+											placeholder="User Name" value="" name="uname" tabindex="4"/>
 									</div>
 
 									<div class="form-group">
 										<input type="password" class="form-control"
-											placeholder="Confirm Password" value="" name="cpwd" tabindex="6" required="required"/>
+											placeholder="Confirm Password" value="" name="cpwd" tabindex="6"/>
 									</div>
 
 								</div>
