@@ -26,7 +26,7 @@
 		position: absolute;
 		left:0.6%;
 		width: 49%;
-		height:80%;
+		height:86%;
 		padding-left: 1%;
 		border-right: 2.5px dashed white;
 		border-bottom-left-radius:30px;
@@ -37,7 +37,7 @@
 		position: absolute;
 		left: 50.8%;
 		width: 47.4%;
-		height: 80%;
+		height: 86%;
 		padding-left: 1%;
 		border-left: 2.5px dashed #eb1736;
 		border-bottom-right-radius:30px;
@@ -45,7 +45,7 @@
 
 	.centered{
 		position: absolute;
-		top:102.5%;
+		top:108.5%;
 		left:0.6%;
 		height: 8%;
 		width: 98.7%;
@@ -106,6 +106,22 @@ request.setAttribute("username",request.getParameter("uname"));
 						<td><input type="text" name="wt" placeholder="in kg" size="40"></td>
 					</tr>
 
+					<tr>
+						<td>Blood Group:</td>
+						<td>
+							<select name="bg">
+								<option>A +ve</option>
+								<option>B +ve</option>
+								<option>AB +ve</option>
+								<option>O +ve</option>
+								<option>A -ve</option>
+								<option>B -ve</option>
+								<option>AB -ve</option>
+								<option>O -ve</option>
+							</select>
+						</td>
+					</tr>
+					
 					<tr>
 						<td>Sex:</td>
 						<td>

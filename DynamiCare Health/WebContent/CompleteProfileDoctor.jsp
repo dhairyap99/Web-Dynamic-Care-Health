@@ -25,7 +25,7 @@
 		position: absolute;
 		left:0.6%;
 		width: 97.6%;
-		height:50%;
+		height:55%;
 		padding-left: 1%;
 		border-right: 2.5px dashed white;
 		border-bottom-left-radius:30px;
@@ -34,7 +34,7 @@
 	
 	.centered{
 		position: absolute;
-		top:73%;
+		top:78%;
 		left:0.6%;
 		height: 8%;
 		width: 98.7%;
@@ -107,6 +107,11 @@
 					<tr>
 						<td>Location:</td>         
 						<td><input type="text" name="loc" size="40"></td>
+					</tr>
+					
+					<tr>
+						<td>Charges:</td>         
+						<td><input type="text" name="cha" size="40"></td>
 					</tr>
 					
 					<tr>

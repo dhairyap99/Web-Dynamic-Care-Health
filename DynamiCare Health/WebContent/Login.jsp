@@ -2,7 +2,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="java.security.MessageDigest" %>
+<%@page import="java.security.MessageDigest"%>
 <%!Connection con;
 Statement st;
 ResultSet rs;
@@ -38,20 +38,29 @@ ResultSet rs;
 	}
 	String pass=buf.toString();
 	
-	rs=st.executeQuery("SELECT `pass`,`type` FROM `users` WHERE `uname`='"+user+"' LIMIT 1");
+	rs=st.executeQuery("SELECT "
+			+"IFNULL((Select `pass` FROM users WHERE `uname`='"+user+"'),'Null'),"
+			+"IFNULL((Select `type` FROM users WHERE `uname`='"+user+"'),'Null') LIMIT 1");
 	
 	while(rs.next()){
-	if (rs.getString(1).equals(pass)){
+		if (rs.getString(1).equals(pass)){
 		if (rs.getString(2).equals("Doctor")){%>
-			<%@ include file="HomePageDoctor.jsp" %> 	
-		<%}
+<%@ include file="HomePageDoctor.jsp"%>
+<%}
 		else {%>
-			<%@ include file="HomePagePatient.jsp" %>
-		<%}
+<%@ include file="HomePagePatient.jsp"%>
+<%}
 		}
-	else{%>
-		<%= "Passwords don't Match" %>
-	<%}
+		else if(rs.getString(1).equals("Null")){
+			String redirectURL = "/DynamiCare_Health/Login1.jsp";
+			session.setAttribute("msg","User Doesn't Exist");
+		    response.sendRedirect(redirectURL);
+		}
+	else{
+		String redirectURL = "/DynamiCare_Health/Login1.jsp";
+		session.setAttribute("msg","Passwords don't match");
+	    response.sendRedirect(redirectURL);
+	}
 	}}
 catch(Exception e){
 out.println(e);

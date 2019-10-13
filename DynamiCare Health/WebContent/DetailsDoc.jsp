@@ -26,7 +26,7 @@ body {
 	position: absolute;
 	left: 0.6%;
 	width: 49%;
-	height: 200px;
+	height: 230px;
 	padding-left: 1%;
 	border-right: 2.5px dashed white;
 	border-bottom-left-radius: 30px;
@@ -41,7 +41,7 @@ body {
 	position: absolute;
 	left: 50.8%;
 	width: 47.4%;
-	height: 200px;
+	height: 230px;
 	padding-left: 1%;
 	border-left: 2.5px dashed #eb1736;
 	border-bottom-right-radius: 30px;
@@ -82,7 +82,7 @@ td {
 		st=con.createStatement();
 		rs=st.executeQuery("SELECT doctordetails.sex,doctordetails.age,doctordetails.phone, "
 				+"doctordetails.education, doctordetails.specification, doctordetails.location, doctordetails.experience,"
-				+"users.fname, users.lname "
+				+"users.fname, users.lname,doctordetails.charges "
 				+"FROM `doctordetails` "
 				+"INNER JOIN `users` "
 				+"ON doctordetails.username=users.uname "
@@ -94,7 +94,7 @@ td {
 			out.println("<table cellpadding='6'>");
 				out.println("<tr>");
 					out.println("<td><b>Name: </b></td>");
-					out.println("<td>"+rs.getString(8)+" "+rs.getString(9)+"</td>");
+					out.println("<td>Dr. "+rs.getString(8)+" "+rs.getString(9)+"</td>");
 				out.println("</tr>");
 				
 				out.println("<tr>");
@@ -134,6 +134,12 @@ td {
 				out.println("<tr>");
 					out.println("<td><b>Location: </b></td>");
 					out.println("<td>"+rs.getString(6)+"</td>");
+				out.println("</tr>");
+				
+
+				out.println("<tr>");
+					out.println("<td><b>Charges: </b></td>");
+					out.println("<td>Rs. "+rs.getString(10)+"</td>");
 				out.println("</tr>");
 				
 			out.println("</table>");

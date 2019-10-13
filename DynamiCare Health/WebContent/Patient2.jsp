@@ -5,7 +5,7 @@
 	pageEncoding="ISO-8859-1" import="java.sql.*"%>
 <%!Connection con;
 Statement st;
-String pname,ht,wt,sex,age,ph,fhis,alhis,mil,ename1,ename2,eph1,eph2,rel1,rel2;
+String pname,ht,wt,sex,age,ph,fhis,alhis,mil,ename1,ename2,eph1,eph2,rel1,rel2,blg;
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -26,6 +26,7 @@ String pname,ht,wt,sex,age,ph,fhis,alhis,mil,ename1,ename2,eph1,eph2,rel1,rel2;
 	pname=request.getParameter("user");
 	ht=request.getParameter("ht");
 	wt=request.getParameter("wt");
+	blg=request.getParameter("bg");
 	sex=request.getParameter("sex");
 	age=request.getParameter("age");
 	ph=request.getParameter("ph");
@@ -38,10 +39,11 @@ String pname,ht,wt,sex,age,ph,fhis,alhis,mil,ename1,ename2,eph1,eph2,rel1,rel2;
 	eph2=request.getParameter("eph2");
 	rel1=request.getParameter("rel1");
 	rel2=request.getParameter("rel2");
+	
 
 
 	int row=st.executeUpdate("insert into patientdetails values('"+pname+"','"+ht+"','"+wt+"','"+sex+"','"+age+"','"+ph+"','"+fhis+"','"
-	+alhis+"','"+mil+"')");
+	+alhis+"','"+mil+"','"+blg+"')");
 
 	int row1=st.executeUpdate("insert into patientcontacts values('"+pname+"','"+ename1+"','"+eph1+"','"+rel1+"','"+ename2+"','"+eph2+"','"
 			+rel2+"')");

@@ -5,7 +5,7 @@
 pageEncoding="ISO-8859-1" import="java.sql.*"%>
 <%!Connection con;
 Statement st;
-String pname,sex,age,ph,edu,exp,spec,loc;
+String pname,sex,age,ph,edu,exp,spec,loc,ch;
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -31,10 +31,11 @@ String pname,sex,age,ph,edu,exp,spec,loc;
 	spec=request.getParameter("spec");
 	loc=request.getParameter("loc");
 	exp=request.getParameter("exp");
+	ch=request.getParameter("ch");
 
 
 	int row=st.executeUpdate("insert into doctordetails values('"+pname+"','"+sex+"','"+age+"','"+ph+"','"+edu+"','"+spec+"','"+loc+"','"
-	+exp+"')");
+	+exp+"','"+ch+"')");
 			
 	st.close();
 

@@ -2,6 +2,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
+ <%@page import="java.text.DecimalFormat" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%!
@@ -75,13 +76,13 @@ td {
 
 	<%
 		String username=(String)session.getAttribute("user");
-		
+		DecimalFormat format = new DecimalFormat("#0.000");
 		try {
 		Class.forName("com.mysql.jdbc.Driver");
 		con=DriverManager.getConnection("jdbc:mysql://localhost/dchealth?serverTimezone=UTC","root","");
 		st=con.createStatement();
 		rs=st.executeQuery("SELECT patientdetails.height, patientdetails.weight, patientdetails.sex, patientdetails.age, "
-		+"patientdetails.phone, patientdetails.famhis,patientdetails.alhis,patientdetails.majil,users.fname,users.lname "
+		+"patientdetails.famhis,patientdetails.alhis,patientdetails.majil,users.fname,users.lname, patientdetails.bg "
 		+"FROM patientdetails INNER JOIN users "
 		+"ON patientdetails.username = users.uname "
 		+"WHERE patientdetails.username='"+username+"' limit 1");
@@ -92,7 +93,7 @@ td {
 			out.println("<table cellpadding='6'>");
 				out.println("<tr>");
 					out.println("<td><b>Name: </b></td>");
-					out.println("<td>"+rs.getString(9)+" "+rs.getString(10)+"</td>");
+					out.println("<td>"+rs.getString(8)+" "+rs.getString(9)+"</td>");
 				out.println("</tr>");
 				
 				weight = Float.parseFloat(rs.getString(2));	
@@ -112,12 +113,13 @@ td {
 				
 				out.println("<tr>");
 					out.println("<td><b>Body Mass Index: </b></td>");
-					out.println("<td>"+bmi+"</td>");
+					out.println("<td>"+format.format(bmi)+"</td>");
 				out.println("</tr>");
 				
+
 				out.println("<tr>");
-					out.println("<td><b>Sex: </b></td>");
-					out.println("<td>"+rs.getString(3)+"</td>");
+					out.println("<td><b>Blood Group: </b></td>");
+					out.println("<td>"+rs.getString(10)+"</td>");
 				out.println("</tr>");
 				out.println("</table>");
 				out.println("</div>");
@@ -125,28 +127,28 @@ td {
 				out.println("<div class='right'>");
 				out.println("<table cellpadding='6'>");
 				out.println("<tr>");
-					out.println("<td><b>Age: </b></td>");
-					out.println("<td>"+rs.getString(4)+"</td>");
+					out.println("<td><b>Sex: </b></td>");
+					out.println("<td>"+rs.getString(3)+"</td>");
 				out.println("</tr>");
 				
 				out.println("<tr>");
-					out.println("<td><b>Phone No.: </b></td>");
+					out.println("<td><b>Age: </b></td>");
+					out.println("<td>"+rs.getString(4)+"</td>");
+				out.println("</tr>");
+								
+				out.println("<tr>");
+					out.println("<td><b>Family History: </b></td>");
 					out.println("<td>"+rs.getString(5)+"</td>");
 				out.println("</tr>");
 				
 				out.println("<tr>");
-					out.println("<td><b>Family History: </b></td>");
+					out.println("<td><b>Allergy History: </b></td>");
 					out.println("<td>"+rs.getString(6)+"</td>");
 				out.println("</tr>");
 				
 				out.println("<tr>");
-					out.println("<td><b>Allergy History: </b></td>");
-					out.println("<td>"+rs.getString(7)+"</td>");
-				out.println("</tr>");
-				
-				out.println("<tr>");
 					out.println("<td><b>Major Illness: </b></td>");
-					out.println("<td>"+rs.getString(8)+"</td>");
+					out.println("<td>"+rs.getString(7)+"</td>");
 				out.println("</tr>");
 			out.println("</table>");
 			out.println("</div>");
