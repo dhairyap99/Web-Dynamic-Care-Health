@@ -34,7 +34,7 @@ String shifts;
 	spec=request.getParameter("spec");
 	loc=request.getParameter("loc");
 	exp=request.getParameter("exp");
-	ch=request.getParameter("ch");
+	ch=request.getParameter("cha");
 	
 	sh = request.getParameterValues("shift");
 	if (sh != null && sh.length != 0) {
@@ -42,7 +42,7 @@ String shifts;
 	}
 
 	int row=st.executeUpdate("insert into doctordetails values('"+pname+"','"+sex+"','"+age+"','"+ph+"','"+edu+"','"+spec+"','"+loc+"','"
-	+exp+"','"+ch+","+shifts+"')");
+	+exp+"','"+ch+"','"+shifts+"')");
 			
 	st.close();
 

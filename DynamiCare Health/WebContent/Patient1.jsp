@@ -76,7 +76,7 @@
 				int row = st.executeUpdate("insert into users values('" + first + "','" + last + "','" + email
 						+ "','" + user + "','" + pass + "','Patient')");
 				String subject="Welcome to DynamiCare Health Community";
-				String msg="Congrats "+first+" "+last+"\n"+"You have been enrolled to DynamiCare Health Community";
+				String msg="Congrats "+first+" "+last+"\n"+"You have been successfully enrolled to DynamiCare Health Community";
 				Mailer.send(email, subject, msg); 
 				  
 	%>

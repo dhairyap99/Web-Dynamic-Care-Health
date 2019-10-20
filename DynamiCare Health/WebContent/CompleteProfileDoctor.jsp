@@ -28,7 +28,7 @@ body {
 	position: absolute;
 	left: 0.6%;
 	width: 97.6%;
-	height: 57%;
+	height: 60%;
 	padding-left: 1%;
 	border-right: 2.5px dashed white;
 	border-bottom-left-radius: 30px;
@@ -52,6 +52,7 @@ body {
 	left: 38%;
 	border: 2px solid #101357;
 	width: 25%;
+	top:2%;
 	border-radius: 35px;
 }
 
@@ -132,7 +133,7 @@ td {
 
 					<tr>
 						<td>Experience:</td>
-						<td><input type="text" name="exp" size="40"></td>
+						<td><input type="text" name="exp" size="40" placeholder="In years"></td>
 					</tr>
 
 				</table>

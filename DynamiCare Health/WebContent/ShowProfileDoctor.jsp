@@ -13,7 +13,7 @@ ResultSet rs;
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Details</title>
+<title>Doctor's Profile</title>
 <style>
 body {
 	background: #5252d4;
@@ -64,17 +64,33 @@ td b {
 td {
 	padding: 10px;
 }
+
+a{
+	color: #eb1736;
+	background: white;
+	position: absolute;
+	top:360px;
+	left:41%;
+	border-radius: 30px;
+	font-size: 20px;
+	font-family: Verdana;
+	position:absolute;
+	font-weight:bold;
+	height:100px;
+	width:260px;
+	border: 2.5px solid #eb1736;
+}
 </style>
 </head>
 <body>
 	<div class="title">
-		<h2 style="font-family: Verdana">Complete Details</h2>
+		<h2 style="font-family: Verdana">Doctor's Profile</h2>
 		<hr>
 	</div>
-
 	<%
-		String username=(String)session.getAttribute("user");
-		
+		String doctorname=request.getParameter("uname");
+		session.setAttribute("dname",doctorname);
+        session.setAttribute("pname",session.getAttribute("username").toString());
 		try {
 		Class.forName("com.mysql.jdbc.Driver");
 		con=DriverManager.getConnection("jdbc:mysql://localhost/dchealth?serverTimezone=UTC","root","");
@@ -85,7 +101,7 @@ td {
 				+"FROM `doctordetails` "
 				+"INNER JOIN `users` "
 				+"ON doctordetails.username=users.uname "
-				+"WHERE doctordetails.username='"+username+"'");
+				+"WHERE doctordetails.username='"+doctorname+"'");
 		
 		while(rs.next())
 		{
@@ -155,6 +171,6 @@ td {
 	out.println(e);
 }
 %>
-
+<a href="Booking.jsp"><span style="position:relative;top:40px;left:10px;">BOOK APPOINTMENT</span></a>
 </body>
 </html>

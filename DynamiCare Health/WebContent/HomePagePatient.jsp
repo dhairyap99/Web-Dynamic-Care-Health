@@ -31,24 +31,6 @@ String h,w,a,s,u;
 	top: 12.3%;
 }
 
-.grid-container1 {
-	display: grid;
-	grid-template-columns: 321px 321px 321px 321px;
-	grid-template-rows: auto;
-	grid-gap: 10px;
-	padding: 10px;
-}
-
-.grid-container1>div {
-	text-align: center;
-	padding: 20px 0;
-	font-size: 30px;
-	border: 2px solid red;
-	border-radius: 25px;
-	font-family: verdana;
-	background-color: black;
-}
-
 .icons {
 	border: 1px;
 	padding: 6px;
@@ -78,11 +60,6 @@ a {
 	color: black;
 	vertical-align: middle;
 	top:10%
-}
-
-.doctors-block {
-	position: absolute;
-	top: 100%;
 }
 
 .profile {
