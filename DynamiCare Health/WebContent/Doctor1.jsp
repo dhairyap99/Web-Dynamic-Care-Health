@@ -75,7 +75,7 @@ try{
 		int row=st.executeUpdate("insert into users values('"+first+"','"+last+"','"+email+"','"+user+"','"+pass+"','Doctor')");
 		String subject="Welcome to DynamiCare Health Community";
 				String msg="Congrats Dr. "+first+" "+last+"\n"+"You have been successfully enrolled to DynamiCare Health Community";
-				//Mailer.send(email, subject, msg); %>
+				Mailer.send(email, subject, msg); %>
 	<%@ include file="CompleteProfileDoctor.jsp"%>
 	<%
 	    }
