@@ -2,6 +2,13 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.security.MessageDigest"%>
+<%@page import="java.io.PrintWriter"%>
+<%@page import="java.io.IOException"%>
+<%@page import="javax.servlet.ServletException"%>
+<%@page import="javax.servlet.annotation.WebServlet" %>
+<%@page import="javax.servlet.http.HttpServlet" %>
+<%@page import="net.io.mail.Mailer" %>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%!Connection con;
@@ -65,13 +72,17 @@
 				buf1.append(Long.toString((int) encodedPassword1[i] & 0xff, 16));
 			}
 			String cpass = buf1.toString();
-			if (pass.equals(cpass)) {
+			if (pass.equals(cpass)) {				
 				int row = st.executeUpdate("insert into users values('" + first + "','" + last + "','" + email
 						+ "','" + user + "','" + pass + "','Patient')");
+				String subject="Welcome to DynamiCare Health Community";
+				String msg="Congrats "+first+" "+last+"\n"+"You have been enrolled to DynamiCare Health Community";
+				Mailer.send(email, subject, msg); 
+				  
 	%>
 	<%@ include file="CompleteProfilePatient.jsp"%>
 
-	<%} 
+	<%}
 			else {
 				String redirectURL = "/DynamiCare_Health/SignUpPatient.jsp";
 				session.setAttribute("msg","Passwords don't match");

@@ -1,19 +1,26 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="java.security.MessageDigest" %>
+<%@page import="java.security.MessageDigest"%>
+<%@page import="java.io.PrintWriter"%>
+<%@page import="java.io.IOException"%>
+<%@page import="javax.servlet.ServletException"%>
+<%@page import="javax.servlet.annotation.WebServlet" %>
+<%@page import="javax.servlet.http.HttpServlet" %>
+<%@page import="net.io.mail.Mailer" %>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%! Connection con;
-Statement st;
-String first,last,user,password,cpassword,email;%>
+	pageEncoding="ISO-8859-1"%>
+<%!Connection con;
+	Statement st;
+	String first, last, user, password, cpassword, email;%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 </head>
 <body>
-<% 
+	<% 
 try{
 	Class.forName("com.mysql.jdbc.Driver");
 
@@ -65,9 +72,31 @@ try{
 	}
 	String cpass=buf1.toString();	
 	if (pass.equals(cpass)){
+		out.println("<script>");
+		out.println("var otp = prompt(\"Enter OTP\", \"\");")
+		out.println("</script>");
+		
+		int code=0;
+	    for (int i=0;i<4;i++){
+	    int random = (int )(Math.random() * 9);
+	    code=(code*10)+random;
+	    }
+	    
+	    String subject="Welcome to DynamiCare Health Community";
+	    String msg="Your OTP is "+code;
+	    Mailer.send(email, subject, msg); 
+		  
+	    
+	    if (random==otp){
 		int row=st.executeUpdate("insert into users values('"+first+"','"+last+"','"+email+"','"+user+"','"+pass+"','Doctor')");%>
-		<%@ include file="CompleteProfileDoctor.jsp"%>    
-<%}
+	<%@ include file="CompleteProfileDoctor.jsp"%>
+	<%}
+	    else{
+	    	String redirectURL = "/DynamiCare_Health/SignUpDoctor.jsp";
+			session.setAttribute("msg","Wrong OTP");
+		    response.sendRedirect(redirectURL);
+	    }
+	    }
 	else{
 		String redirectURL = "/DynamiCare_Health/SignUpDoctor.jsp";
 		session.setAttribute("msg","Passwords don't match");

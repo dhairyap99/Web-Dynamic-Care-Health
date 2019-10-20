@@ -50,7 +50,7 @@ String us,se,ag,p,sp;
 	
 	.grid-container1 {
 		display: grid;
-		grid-template-columns: 400px 400px;
+		grid-template-columns: 400px 400px 400px;
 		grid-template-rows: auto;
 		grid-gap: 10px;
 		padding: 10px;
@@ -102,7 +102,7 @@ String us,se,ag,p,sp;
 	.menu-block{
 		position: absolute;
 		top: 70%;
-		left:19%;
+		left:4%;
 	}
 	.profile{
 		width: 20%;
@@ -195,7 +195,13 @@ catch(Exception e){
 							<a href="AppointmentDoc.jsp" style="color:red;">
 								<img class="icons" src="images/appointment.png"><hr>
 							Schedule Appointment</a>			
-						</div>			
+						</div>
+						
+						<div>
+							<a href="AppointmentDoc.jsp" style="color:red;">
+								<img class="icons" src="images/appointment.png"><hr>
+							View Schedule</a>			
+						</div>					
 					</div>
 				</div>
 			</center>

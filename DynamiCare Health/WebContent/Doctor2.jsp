@@ -1,11 +1,14 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
+<%@page import="java.util.Arrays"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1" import="java.sql.*"%>
 <%!Connection con;
 Statement st;
 String pname,sex,age,ph,edu,exp,spec,loc,ch;
+String sh[];
+String shifts;
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -32,10 +35,14 @@ String pname,sex,age,ph,edu,exp,spec,loc,ch;
 	loc=request.getParameter("loc");
 	exp=request.getParameter("exp");
 	ch=request.getParameter("ch");
-
+	
+	sh = request.getParameterValues("shift");
+	if (sh != null && sh.length != 0) {
+		shifts=Arrays.asList(sh).toString().substring(1).replace("]", "");
+	}
 
 	int row=st.executeUpdate("insert into doctordetails values('"+pname+"','"+sex+"','"+age+"','"+ph+"','"+edu+"','"+spec+"','"+loc+"','"
-	+exp+"','"+ch+"')");
+	+exp+"','"+ch+","+shifts+"')");
 			
 	st.close();
 

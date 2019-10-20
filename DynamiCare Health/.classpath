@@ -15,5 +15,7 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Rohit/Desktop/Tomcat 8/apache-tomcat-8.5.45-windows-x64/apache-tomcat-8.5.45/lib/jaf-1.0.2/activation.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Rohit/Desktop/Tomcat 8/apache-tomcat-8.5.45-windows-x64/apache-tomcat-8.5.45/lib/javamail-1.4.5/mail.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
