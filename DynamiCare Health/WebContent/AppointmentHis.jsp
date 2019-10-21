@@ -96,12 +96,16 @@ while(rs.next()){
 	SimpleDateFormat formatter = new SimpleDateFormat("EEEE, MMM dd, yyyy");
 	Date date = sdf.parse(dateInString);
     out.println("<td>"+formatter.format(date)+"</td>");
-	
-	if (rs.getString(5)==null){
+
+	if (rs.getString(6).equals("-1") || rs.getString(6).equals("0")){
 		out.println("<td> ------ </td>");	
 	}
 	else{
-		out.println("<td>"+rs.getString(5)+"</td>");	
+		String timeInString=rs.getString(5); 
+	    SimpleDateFormat sd = new SimpleDateFormat("HH:mm:ss");
+		SimpleDateFormat formatter1 = new SimpleDateFormat("KK:mm a");
+		Date current = sd.parse(timeInString);
+	    out.println("<td>"+formatter1.format(current)+"</td>");
 	}
 
 	out.println("<td>"+rs.getString(8)+"</td>");

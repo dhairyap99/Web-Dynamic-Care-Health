@@ -100,6 +100,17 @@ a {
 </head>
 
 <body>
+<center>
+		<div class="topnav">			
+				<a href="" class="active"> DC-Health</a>
+				<a href="DetailsDoc.jsp"> View Details</a>
+				<a href="AppointmentPat.jsp"> Schedule Appointment</a>
+				<a href="ViewSchedule.jsp"> View Schedule</a>
+				<a href="Payments.jsp"> Payments </a>
+				<a href="Login.html" style="float:right;">Logout</a>
+		</div>
+	</center>
+	
 	<%
 	try {
 	Class.forName("com.mysql.jdbc.Driver");
@@ -167,16 +178,6 @@ catch(Exception e){
 			</table>
 		</center>
 	</div>
-	
-		<center>
-		<div class="topnav">			
-				<a href="" class="active"> DC-Health</a>
-				<a href="DetailsDoc.jsp"> View Details</a>
-				<a href="AppointmentPat.jsp"> Schedule Appointment</a>
-				<a href="ViewSchedule.jsp"> View Schedule</a>
-				<a href="Login.html" style="float:right;">Logout</a>
-		</div>
-	</center>
 
 	<%
 			session.setAttribute("user",us);

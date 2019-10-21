@@ -12,10 +12,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%!Connection con2;
-	Statement st2,st3;
-	ResultSet rs2;
+	Statement st2,st3,st4,st5,st6,st7;
+	ResultSet rs2,rs4,rs5;
 	String p,t,r,date,f,l,user;
-	StringBuffer bookingid;%>
+	StringBuffer bookingid;
+	float pbalance,dbalance,charges;%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,13 +31,39 @@ try{
 
 	con2=DriverManager.getConnection("jdbc:mysql://localhost/dchealth?serverTimezone=UTC","root","");
 	
-	st2=con2.createStatement();
-	
 	p=request.getParameter("user");
 	t=request.getParameter("time");
 	r=request.getParameter("reas");
 	date=request.getParameter("date");
 	
+	st4=con2.createStatement();
+	rs4=st4.executeQuery("SELECT `money` FROM `wallet` WHERE `username`='"+p+"'");
+	while(rs4.next()){
+		pbalance=Float.valueOf(rs4.getString(1));
+	}
+	
+	st3=con2.createStatement();
+	rs2=st3.executeQuery("SELECT uname FROM `users` WHERE `fname`='"+f+"' and `lname`='"+l+"' limit 1");
+	
+	while(rs2.next())
+	{
+		user=rs2.getString(1);
+	}
+	
+	st5=con2.createStatement();
+	rs5=st5.executeQuery("SELECT wallet.money,doctordetails.charges "
+			+"FROM doctordetails INNER JOIN wallet "
+			+"ON doctordetails.username=wallet.username "
+			+"WHERE doctordetails.username='"+user+"'");
+	while(rs5.next()){
+		dbalance=Float.valueOf(rs5.getString(1));
+		charges=Float.valueOf(rs5.getString(2));
+	}
+	
+	if (pbalance>=charges){
+	pbalance=pbalance-charges;
+	dbalance=dbalance+charges;	
+			
 	String characters="QWERTYUIOPASDFGHJKLZXCVBNM";
 	bookingid=new StringBuffer("");
 	
@@ -48,18 +75,21 @@ try{
 		bookingid.append((int)(Math.random()*9));
 	}
 	
-	st3=con2.createStatement();
-	rs2=st3.executeQuery("SELECT uname FROM `users` WHERE `fname`='"+f+"' and `lname`='"+l+"' limit 1");
-	
-	while(rs2.next())
-	{
-		user=rs2.getString(1);
-	}
 	String b=bookingid.toString();
-	int row=st2.executeUpdate("INSERT INTO `booking`(`bookingid`, `pname`, `dname`, `date`, `shift`, `reason`) VALUES ('"
-	+b+"','"+p+"','"+user+"','"+date+"','"+t+"','"+r+"')");%>
+	st6=con2.createStatement();
+	int row = st6.executeUpdate("UPDATE `wallet` SET `money`=" + pbalance + " WHERE `username`='" + p + "'");
+	
+	st7=con2.createStatement();
+	int row1 = st7.executeUpdate("UPDATE `wallet` SET `money`=" + dbalance + " WHERE `username`='" + user + "'");
+	
+	st2=con2.createStatement();
+	int row2=st2.executeUpdate("INSERT INTO `booking`(`bookingid`, `pname`, `dname`, `date`, `shift`, `reason`) VALUES ('"
+	+b+"','"+p+"','"+user+"','"+date+"','"+t+"','"+r+"')");
+	%>
+	
 	<%@ include file="HomePagePatient.jsp"%>
 <%}
+	else {out.println("Insufficient Balance");}}
 catch(Exception e){
 	out.println(e);
 }

@@ -177,7 +177,7 @@ color:white;
 		out.println("</tr>");
 			out.println("</table>");
 			out.println("</div>");%>
-	<form action="ScheduleAppointment.jsp?" action="get">
+	<form action="ScheduleAppointment.jsp" action="get">
 		<%		out.println("Select Time: ");
 				switch(shift){
 				case "Morning":

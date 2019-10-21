@@ -7,9 +7,10 @@
     pageEncoding="ISO-8859-1"%>
 <%!
 Connection con1;
-Statement st4,st1,st2;
-ResultSet rs1,rs2;
-String b,pf,pl,df,dl,email,user;
+Statement st4,st1,st2,st5,st6,st7,st8;
+ResultSet rs1,rs2,rs5,rs6;
+String b,pf,pl,df,dl,email,user,p;
+float pbalance,dbalance,charges;
 %>
 <!DOCTYPE html>
 <html>
@@ -27,11 +28,13 @@ try {
 	int row=st4.executeUpdate("UPDATE `booking` SET `status`=-1 WHERE `bookingid`='"+b+"'");
 	
 	st1=con1.createStatement();
-	rs1=st1.executeQuery("SELECT fname,lname,mail from users WHERE uname in (SELECT pname from booking WHERE bookingid='"+b+"') limit 1");
+	rs1=st1.executeQuery("SELECT fname,lname,mail,uname from users WHERE uname in (SELECT pname from booking WHERE bookingid='"+b+"') limit 1");
+	
 	while(rs1.next()){
 		pf=rs1.getString(1);
 		pl=rs1.getString(2);
 		email=rs1.getString(3);
+		p=rs1.getString(4);
 	}
 	
 	st2=con1.createStatement();
@@ -42,8 +45,34 @@ try {
 		user=rs2.getString(3);
 	}
 	
+	st5=con1.createStatement();
+	rs5=st5.executeQuery("SELECT `money` FROM `wallet` WHERE `username`='"+p+"'");
+	while(rs5.next()){
+		pbalance=Float.valueOf(rs5.getString(1));
+	}
+		
+	st6=con1.createStatement();
+	rs6=st6.executeQuery("SELECT wallet.money,doctordetails.charges "
+			+"FROM doctordetails INNER JOIN wallet "
+			+"ON doctordetails.username=wallet.username "
+			+"WHERE doctordetails.username='"+user+"'");
+	while(rs6.next()){
+		dbalance=Float.valueOf(rs6.getString(1));
+		charges=Float.valueOf(rs6.getString(2));
+	}
+	
+	dbalance=dbalance-charges;
+	pbalance=pbalance+charges;
+	
+	st7=con1.createStatement();
+	int row1 = st7.executeUpdate("UPDATE `wallet` SET `money`=" + pbalance + " WHERE `username`='" + p + "'");
+	
+	st8=con1.createStatement();
+	int row2 = st8.executeUpdate("UPDATE `wallet` SET `money`=" + dbalance + " WHERE `username`='" + user + "'");
+	
 	String subject="Appointment Cancelled";
-	String msg="Dear "+pf+" "+pl+",\nSorry to inform you that your appointment with Dr. "+df+" "+dl+" has been cancelled. ";
+	String msg="Dear "+pf+" "+pl+",\nSorry to inform you that your appointment with Dr. "+df+" "+dl+" has been cancelled. \n";
+	msg+="Rs. "+charges+" has been refunded to your account.";
 	Mailer.send(email, subject, msg);	
 	session.setAttribute("user",user);%>
 	<%@ include file="AppointmentPat.jsp"%>
