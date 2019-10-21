@@ -182,12 +182,16 @@ color:white;
 				switch(shift){
 				case "Morning":
 					out.println("<input type='time' name='appt' min='09:00' max='12:00'>");
+					break;
 				case "Afternoon":
 					out.println("<input type='time' name='appt' min='12:00' max='16:00'>");
+					break;
 				case "Evening":
 					out.println("<input type='time' name='appt' min='16:00' max='19:00'>");
+					break;
 				case "Night":
 					out.println("<input type='time' name='appt' min='19:00' max='23:00'>");
+					break;
 				}%>
 				<input type="hidden" name="b" value=<%=b%>>
 		<input type="submit" value="CONFIRM">

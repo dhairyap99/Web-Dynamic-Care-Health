@@ -48,7 +48,7 @@ try {
 	st3=con1.createStatement();
 	rs3=st3.executeQuery("SELECT `date`,`time` FROM `booking` WHERE `bookingid`='"+b+"' limit 1");
 	while(rs3.next()){
-		msg+=rs3.getString(3)+" on "+rs3.getString(2)+".\nYour booking id is "+b+".";
+		msg+=rs3.getString(2)+" on "+rs3.getString(1)+".\nYour booking id is "+b+".";
 	}
 	Mailer.send(email, subject, msg);
 	session.setAttribute("user",user);%>

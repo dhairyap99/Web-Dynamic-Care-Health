@@ -122,7 +122,7 @@ max = sdf.format(c.getTime());
 				<table cellpadding="6">
 					<tr>
 						<td>User Name:</td>
-						<td><input type="text" name="patient" size="40"
+						<td><input type="text" name="user" size="40"
 							value="<%= patname %>" readonly="readonly"
 							style="color: #eb1736"></td>
 					</tr>

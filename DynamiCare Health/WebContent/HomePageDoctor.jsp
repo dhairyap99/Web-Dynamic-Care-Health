@@ -100,7 +100,8 @@ a {
 </head>
 
 <body>
-	<%try {
+	<%
+	try {
 	Class.forName("com.mysql.jdbc.Driver");
 	con2=DriverManager.getConnection("jdbc:mysql://localhost/dchealth?serverTimezone=UTC","root","");
 
@@ -172,7 +173,7 @@ catch(Exception e){
 				<a href="" class="active"> DC-Health</a>
 				<a href="DetailsDoc.jsp"> View Details</a>
 				<a href="AppointmentPat.jsp"> Schedule Appointment</a>
-				<a href="Schedule.jsp"> View Schedule</a>
+				<a href="ViewSchedule.jsp"> View Schedule</a>
 				<a href="Login.html" style="float:right;">Logout</a>
 		</div>
 	</center>

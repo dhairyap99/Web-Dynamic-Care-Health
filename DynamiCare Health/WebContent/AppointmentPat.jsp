@@ -40,6 +40,7 @@ a {
 	<h2 style="font-family: verdana">Confirm Appointment</h2>
 	<div class="grid-container">
 		<%
+		rs=null;
 			String docname = session.getAttribute("user").toString();
 			try {
 				Class.forName("com.mysql.jdbc.Driver");

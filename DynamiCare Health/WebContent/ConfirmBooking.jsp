@@ -11,10 +11,10 @@
 <%@page import="net.io.mail.Mailer" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%!Connection con;
-	Statement st,st1;
-	ResultSet rs;
-	String p,t,r,date,f,l,u;
+<%!Connection con2;
+	Statement st2,st3;
+	ResultSet rs2;
+	String p,t,r,date,f,l,user;
 	StringBuffer bookingid;%>
 <!DOCTYPE html>
 <html>
@@ -28,11 +28,11 @@ l=session.getAttribute("lname").toString();
 try{
 	Class.forName("com.mysql.jdbc.Driver");
 
-	con=DriverManager.getConnection("jdbc:mysql://localhost/dchealth?serverTimezone=UTC","root","");
+	con2=DriverManager.getConnection("jdbc:mysql://localhost/dchealth?serverTimezone=UTC","root","");
 	
-	st=con.createStatement();
+	st2=con2.createStatement();
 	
-	p=request.getParameter("patient");
+	p=request.getParameter("user");
 	t=request.getParameter("time");
 	r=request.getParameter("reas");
 	date=request.getParameter("date");
@@ -48,18 +48,18 @@ try{
 		bookingid.append((int)(Math.random()*9));
 	}
 	
-	st1=con.createStatement();
-	rs=st1.executeQuery("SELECT uname FROM `users` WHERE `fname`='"+f+"' and `lname`='"+l+"' limit 1");
+	st3=con2.createStatement();
+	rs2=st3.executeQuery("SELECT uname FROM `users` WHERE `fname`='"+f+"' and `lname`='"+l+"' limit 1");
 	
-	while(rs.next())
+	while(rs2.next())
 	{
-		u=rs.getString(1);
+		user=rs2.getString(1);
 	}
 	String b=bookingid.toString();
-	int row=st.executeUpdate("INSERT INTO `booking`(`bookingid`, `pname`, `dname`, `date`, `shift`, `reason`) VALUES ('"
-	+b+"','"+p+"','"+u+"','"+date+"','"+t+"','"+r+"')");
-	out.println("Inserted Successfully");
-}
+	int row=st2.executeUpdate("INSERT INTO `booking`(`bookingid`, `pname`, `dname`, `date`, `shift`, `reason`) VALUES ('"
+	+b+"','"+p+"','"+user+"','"+date+"','"+t+"','"+r+"')");%>
+	<%@ include file="HomePagePatient.jsp"%>
+<%}
 catch(Exception e){
 	out.println(e);
 }
