@@ -89,7 +89,11 @@ try{
 	
 	<%@ include file="HomePagePatient.jsp"%>
 <%}
-	else {out.println("Insufficient Balance");}}
+	else {
+		String redirectURL = "/DynamiCare_Health/HomePagePatient1.jsp?user="+p;
+		session.setAttribute("msg","Insufficient Balance");
+	    response.sendRedirect(redirectURL);
+	    }}
 catch(Exception e){
 	out.println(e);
 }
