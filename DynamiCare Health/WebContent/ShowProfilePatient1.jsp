@@ -17,62 +17,64 @@ float weight,height,bmi;
 <meta charset="ISO-8859-1">
 <title>Details</title>
 <style>
+h2 {
+	position: absolute;
+	left: 650px;
+	top: 0px;
+}
+
+table {
+	position: absolute;
+	left: 650px;
+	top: 85px;
+}
+
 body {
-	background: #5252d4;
-}
-
-.left {
-	color: #eb1736;
-	background: white;
-	position: absolute;
-	left: 0.6%;
-	width: 49%;
-	height: 260px;
-	padding-left: 1%;
-	border-right: 2.5px dashed white;
-	border-bottom-left-radius: 30px;
 	font-size: 20px;
 	font-family: Verdana;
-}
-
-.right {
-	font-size: 20px;
-	color: #eb1736;
-	background: white;
-	position: absolute;
-	left: 50.8%;
-	width: 47.4%;
-	height: 260px;
-	padding-left: 1%;
-	border-left: 2.5px dashed #eb1736;
-	border-bottom-right-radius: 30px;
-	font-family: Verdana;
-}
-
-.title {
-	background: #eb1736;
-	color: white;
-	padding: 14px;
-	text-align: center;
-	border-top-left-radius: 30px;
-	border-top-right-radius: 30px;
 }
 
 td b {
-	text-decoration: underline;
 	color: #5252d4;
 }
 
 td {
 	padding: 10px;
 }
+
+form {
+	position: absolute;
+	top: 80%;
+	color: black;
+}
+
+.button {
+	color: white;
+	background: #eb1736;
+	border-radius: 30px;
+	font-size: 20px;
+	font-family: Verdana;;
+	font-weight: bold;
+	height: 100px;
+	width: 260px;
+	border: 2.5px solid #eb1736;
+}
+
+.button:hover {
+	color: #eb1736;
+	background: white;
+}
+
+.no-border {
+	border: none;
+}
+
+img {
+	height: 625px;
+}
 </style>
 </head>
 <body>
-	<div class="title">
-		<h2 style="font-family: Verdana">Complete Details</h2>
-		<hr>
-	</div>
 
 	<%
 		String username=request.getParameter("uname");
@@ -88,13 +90,15 @@ td {
 		+"WHERE patientdetails.username='"+username+"' limit 1");
 		
 		while(rs.next())
-		{
-			out.println("<div class='left'>");
+		{if (rs.getString(3).equals("Male")){
+			out.println("<img src=\"images/bannermalepat.jpg\">");				
+		}
+		else{
+			out.println("<img src=\"images/bannerfemalepat.jpg\">");	
+		}
+		out.println("<h2>" + rs.getString(8) + " " + rs.getString(9) + "</h2>");
+
 			out.println("<table cellpadding='6'>");
-				out.println("<tr>");
-					out.println("<td><b>Name: </b></td>");
-					out.println("<td>"+rs.getString(8)+" "+rs.getString(9)+"</td>");
-				out.println("</tr>");
 				
 				weight = Float.parseFloat(rs.getString(2));	
 				height = Float.parseFloat(rs.getString(1));	
@@ -121,15 +125,6 @@ td {
 					out.println("<td><b>Blood Group: </b></td>");
 					out.println("<td>"+rs.getString(10)+"</td>");
 				out.println("</tr>");
-				out.println("</table>");
-				out.println("</div>");
-				
-				out.println("<div class='right'>");
-				out.println("<table cellpadding='6'>");
-				out.println("<tr>");
-					out.println("<td><b>Sex: </b></td>");
-					out.println("<td>"+rs.getString(3)+"</td>");
-				out.println("</tr>");
 				
 				out.println("<tr>");
 					out.println("<td><b>Age: </b></td>");
@@ -151,13 +146,15 @@ td {
 					out.println("<td>"+rs.getString(7)+"</td>");
 				out.println("</tr>");
 			out.println("</table>");
-			out.println("</div>");
 		}
 	}
 	catch(Exception e){
 	out.println(e);
 }
 %>
+<button class="button" type="button" value="CANCEL" onclick="location.href='ViewDiagnosis.jsp?u=<%=username%>'"
+		style="position: absolute; top: 460px; left: 700px;"
+		id="cancel">VIEW DIAGNOSIS</button>
 
 </body>
 </html>

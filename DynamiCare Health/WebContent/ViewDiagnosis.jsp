@@ -11,7 +11,7 @@
 <%!Connection con;
 Statement st;
 ResultSet rs;
-String uname,pname;
+String uname;
 %>
 <!DOCTYPE html>
 <html>
@@ -63,17 +63,18 @@ border-collapse:collapse;
 </style>
 <body>
 <div class="title">
-		<h2 style="font-family: Verdana">Today's Schedule</h2>
+		<h2 style="font-family: Verdana">Diagnosis</h2>
 		<hr>
 	</div>
 <table cellpadding="6">
 <tr class="bold" style="border-bottom:1px solid black">
-<td>Booking Id</td>
-<td>Patient Name</td>
+<td>Doctor Name</td>
+<td>Date</td>
 <td>Time</td>
 <td>Reason</td>
 </tr>
 <%
+
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 Calendar c = Calendar.getInstance();
 Date d=new Date();
@@ -82,26 +83,30 @@ String today = sdf.format(d);
 
 SimpleDateFormat sd = new SimpleDateFormat("HH:mm:ss");
 
-uname=session.getAttribute("user").toString(); 
+uname=request.getParameter("u"); 
 Class.forName("com.mysql.jdbc.Driver");
 con=DriverManager.getConnection("jdbc:mysql://localhost/dchealth?serverTimezone=UTC","root","");
 st=con.createStatement();
 
-rs=st.executeQuery("SELECT booking.bookingid,users.fname,users.lname,booking.time,booking.reason,users.uname "
+rs=st.executeQuery("SELECT users.fname,users.lname,booking.date,booking.time,booking.reason,users.uname "
 		+"FROM `booking` INNER JOIN `users` "
-		+"ON booking.pname=users.uname "
-		+"WHERE booking.dname='"+uname+"' and booking.date='"+today+"' and booking.status=1 "
+		+"ON booking.dname=users.uname WHERE "
+		+"booking.pname='"+uname+"' and booking.status=1 and booking.date<'2019-11-20' "
 		+"ORDER BY booking.date,booking.time");
 while(rs.next()){
-	pname=rs.getString(6);
 	out.println("<tr>");
-	out.println("<td>"+rs.getString(1)+"</td>");
-	out.println("<td><a href=\"ShowProfilePatient1.jsp?uname="+rs.getString(6)+"\">"+rs.getString(2)+" "+rs.getString(3)+"</a></td>");
 	
+	out.println("<td><a href=\"ShowProfileDoctor1.jsp?uname="+rs.getString(6)+"\">Dr. "+rs.getString(1)+" "+rs.getString(2)+"</a></td>");
+	
+	String dateInString=rs.getString(3); 
+	SimpleDateFormat formatter = new SimpleDateFormat("EEEE, MMM dd, yyyy");
+	Date date = sdf.parse(dateInString);
+    out.println("<td>"+formatter.format(date)+"</td>");
+
 	String timeInString=rs.getString(4); 
-	SimpleDateFormat formatter = new SimpleDateFormat("KK:mm a");
+	SimpleDateFormat formatter1 = new SimpleDateFormat("KK:mm a");
 	Date current = sd.parse(timeInString);
-    out.println("<td>"+formatter.format(current)+"</td>");
+    out.println("<td>"+formatter1.format(current)+"</td>");
 
 
 	out.println("<td>"+rs.getString(5)+"</td>");
