@@ -11,7 +11,7 @@
 <%!Connection con;
 Statement st;
 ResultSet rs;
-String uname;
+String uname,pname;
 %>
 <!DOCTYPE html>
 <html>
@@ -36,6 +36,11 @@ td{
 text-align:center;
 font-size:18px;
 font-family: Verdana;
+}
+
+a {
+	text-decoration: none;
+	color: #eb1736;
 }
 
 .bold{
@@ -84,17 +89,17 @@ uname=session.getAttribute("user").toString();
 Class.forName("com.mysql.jdbc.Driver");
 con=DriverManager.getConnection("jdbc:mysql://localhost/dchealth?serverTimezone=UTC","root","");
 st=con.createStatement();
-rs=st.executeQuery("SELECT booking.bookingid,users.fname,users.lname,booking.time,booking.reason FROM "
+rs=st.executeQuery("SELECT booking.bookingid,users.fname,users.lname,booking.time,booking.reason,users.uname FROM "
 		+"`booking` INNER JOIN `users` "
 		+"ON booking.pname=users.uname "
 		+"WHERE booking.dname='"+uname+"' and booking.date='"+today+"' and booking.status=1 and booking.time>'"+now+"'"
 		+"ORDER BY booking.date,booking.time");
 while(rs.next()){
+	pname=rs.getString(6);
 	out.println("<tr>");
 	out.println("<td>"+rs.getString(1)+"</td>");
-	out.println("<td>"+rs.getString(2)+" "+rs.getString(3)+"</td>");
+	out.println("<td><a href=\"ShowProfilePatient1.jsp?uname="+rs.getString(6)+"\">"+rs.getString(2)+" "+rs.getString(3)+"</a></td>");
 	
-
 	String timeInString=rs.getString(4); 
 	SimpleDateFormat formatter = new SimpleDateFormat("KK:mm a");
 	Date current = sd.parse(timeInString);
