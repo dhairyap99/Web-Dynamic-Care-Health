@@ -139,7 +139,7 @@ request.setAttribute("username",request.getParameter("uname"));
 					
 					<tr>
 						<td>Phone No.:</td>
-						<td><input type="text" name="ph" size="40"></td>
+						<td><input type="text" name="ph" size="40" minlength="10" maxlength="10"></td>
 					</tr>
 				</table>
 				<hr>
@@ -173,7 +173,7 @@ request.setAttribute("username",request.getParameter("uname"));
 
 					<tr>
 						<td>Phone No.:</td>         
-						<td><input type="text" name="eph1" size="40"></td>
+						<td><input type="text" name="eph1" size="40" minlength="10" maxlength="10"></td>
 					</tr>
 
 					<tr>
@@ -192,7 +192,7 @@ request.setAttribute("username",request.getParameter("uname"));
 
 					<tr>
 						<td>Phone No.:</td>         
-						<td><input type="text" name="eph2" size="40"></td>
+						<td><input type="text" name="eph2" size="40" minlength="10" maxlength="10"></td>
 					</tr>
 
 					<tr>

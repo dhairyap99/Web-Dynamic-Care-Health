@@ -82,7 +82,7 @@ td {
 					<tr>
 						<td>Sex:</td>
 						<td><select name="sex">
-								<option>Male</option>
+								<option selected>Male</option>
 								<option>Female</option>
 						</select></td>
 					</tr>
@@ -95,7 +95,7 @@ td {
 
 					<tr>
 						<td>Phone No.:</td>
-						<td><input type="text" name="ph" size="40"></td>
+						<td><input type="text" name="ph" size="40" minlength="10" maxlength="10"></td>
 					</tr>
 
 					<tr>

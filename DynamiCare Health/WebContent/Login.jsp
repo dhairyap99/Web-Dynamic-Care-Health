@@ -7,7 +7,11 @@
 Statement st;
 ResultSet rs;
 %>
-
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+</head>
+<body>
 <%
 	try {
 	Class.forName("com.mysql.jdbc.Driver");

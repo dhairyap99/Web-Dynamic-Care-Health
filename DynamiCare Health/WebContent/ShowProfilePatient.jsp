@@ -15,6 +15,13 @@ float weight,height,bmi;
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <title>Details</title>
 <style>
 body {
@@ -26,7 +33,8 @@ body {
 	background: white;
 	position: absolute;
 	left: 0.6%;
-	width: 49%;
+	top: 20%;
+	width: 680px;
 	height: 350px;
 	padding-left: 1%;
 	border-right: 2.5px dashed white;
@@ -40,8 +48,9 @@ body {
 	color: #eb1736;
 	background: white;
 	position: absolute;
-	left: 50.8%;
-	width: 47.4%;
+	top: 125px;
+	left: 50%;
+	width: 670px;
 	height: 350px;
 	padding-left: 1%;
 	border-left: 2.5px dashed #eb1736;
@@ -54,8 +63,13 @@ body {
 	color: white;
 	padding: 14px;
 	text-align: center;
+	width: 98.5%;
 	border-top-left-radius: 30px;
 	border-top-right-radius: 30px;
+	position: absolute;
+	margin-top: 2px;
+	margin-left: 8px;
+	border-bottom: 2.5px solid white;
 }
 
 td b {
@@ -67,10 +81,26 @@ td {
 	padding: 10px;
 }
 
-form{
-position:absolute;
-top:80%;
-color:white;
+form {
+	position: absolute;
+	top: 80%;
+	color: black;
+}
+
+.button {
+	color: #eb1736;
+	background: white;
+	border-radius: 30px;
+	font-size: 20px;
+	font-family: Verdana;;
+	font-weight: bold;
+	height: 100px;
+	width: 260px;
+	border: 2.5px solid #eb1736;
+}
+
+.no-border{
+  border:none;
 }
 </style>
 </head>
@@ -177,27 +207,49 @@ color:white;
 		out.println("</tr>");
 			out.println("</table>");
 			out.println("</div>");%>
-	<form action="ScheduleAppointment.jsp" action="get">
-		<%		out.println("Select Time: ");
+	<button class="button" type="button" value="CONFIRM"
+		style="position: absolute; top: 500px; left: 200px;" id="confirm"
+		data-toggle="modal" data-target="#myModal">CONFIRM</button>
+	<button class="button" type="button" value="CANCEL"
+		style="position: absolute; top: 500px; left: 900px;"
+		onclick="location.href='CancelAppointment.jsp?b=<%=b%>'" id="cancel">CANCEL</button>
+
+
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" style="background: #eb1736;color: white;">
+					<h4 class="modal-title">Select Time:</h4>
+				</div>
+				<div class="modal-body no-border">
+					<form action="ScheduleAppointment.jsp" action="get">
+						<%		
 				switch(shift){
 				case "Morning":
-					out.println("<input type='time' name='appt' min='09:00' max='12:00'>");
+					out.println("<input type='time' name='appt' min='09:00' max='12:00' required>");
 					break;
 				case "Afternoon":
-					out.println("<input type='time' name='appt' min='12:00' max='16:00'>");
+					out.println("<input type='time' name='appt' min='12:00' max='16:00' required>");
 					break;
 				case "Evening":
-					out.println("<input type='time' name='appt' min='16:00' max='19:00'>");
+					out.println("<input type='time' name='appt' min='16:00' max='19:00' required>");
 					break;
 				case "Night":
-					out.println("<input type='time' name='appt' min='19:00' max='23:00'>");
+					out.println("<input type='time' name='appt' min='19:00' max='23:00' required>");
 					break;
 				}%>
-				<input type="hidden" name="b" value=<%=b%>>
-		<input type="submit" value="CONFIRM">
-	</form>
-	<button type="button" value="CANCEL" style="position:absolute;top:90%"
-		onclick="location.href='CancelAppointment.jsp?b=<%=b%>'">CANCEL</button>
+						<input type="hidden" name="b" value=<%=b%>> 
+						<input type="submit" value="SUBMIT" >
+					</form>
+
+				</div>
+				<div class="modal-footer no-border">
+					<button type="button" class="btn btn-default" data-dismiss="modal" style="background: #eb1736;color: white;">Close</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
 	<%}
 	}
 	catch(Exception e){
