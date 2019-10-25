@@ -16,48 +16,11 @@ ResultSet rs;
 <title>Doctor's Profile</title>
 <style>
 body {
-	background: #5252d4;
-}
-
-.left {
-	color: #eb1736;
-	background: white;
-	position: absolute;
-	left: 0.6%;
-	width: 49%;
-	height: 230px;
-	padding-left: 1%;
-	border-right: 2.5px dashed white;
-	border-bottom-left-radius: 30px;
-	font-size: 20px;
+font-size: 20px;
 	font-family: Verdana;
-}
-
-.right {
-	font-size: 20px;
-	color: #eb1736;
-	background: white;
-	position: absolute;
-	left: 50.8%;
-	width: 47.4%;
-	height: 230px;
-	padding-left: 1%;
-	border-left: 2.5px dashed #eb1736;
-	border-bottom-right-radius: 30px;
-	font-family: Verdana;
-}
-
-.title {
-	background: #eb1736;
-	color: white;
-	padding: 14px;
-	text-align: center;
-	border-top-left-radius: 30px;
-	border-top-right-radius: 30px;
 }
 
 td b {
-	text-decoration: underline;
 	color: #5252d4;
 }
 
@@ -66,11 +29,11 @@ td {
 }
 
 a{
-	color: #eb1736;
-	background: white;
+	color: white;
+	background: #eb1736;
 	position: absolute;
-	top:360px;
-	left:41%;
+	top:480px;
+	left:250px;
 	border-radius: 30px;
 	font-size: 20px;
 	font-family: Verdana;
@@ -79,17 +42,36 @@ a{
 	height:100px;
 	width:260px;
 	border: 2.5px solid #eb1736;
+	text-decoration: none;
+}
+
+a:hover{
+	color: #eb1736;
+	background: white;
+}
+
+table{
+position:absolute;
+left:200px;
+top:85px;
+}
+
+h2{
+position:absolute;
+left:200px;}
+
+img{
+height:625px;
+position:absolute;
+right:200px;
+top:0px;
 }
 </style>
 </head>
 <body>
-	<div class="title">
-		<h2 style="font-family: Verdana">Doctor's Profile</h2>
-		<hr>
-	</div>
 	<%
 		String doctorname=request.getParameter("uname");
-		session.setAttribute("dname",doctorname);
+	session.setAttribute("dname",doctorname);
         session.setAttribute("pname",session.getAttribute("username").toString());
 		try {
 		Class.forName("com.mysql.jdbc.Driver");
@@ -105,18 +87,15 @@ a{
 		
 		while(rs.next())
 		{
-			out.println("<div class='left'>");
+			if (rs.getString(1).equals("Male")){
+				out.println("<img src=\"images/bannermaledoc.jpg\">");				
+			}
+			else{
+				out.println("<img src=\"images/bannerfemaledoc.jpg\">");	
+			}
+			
+			out.println("<h2>Dr. "+rs.getString(8)+" "+rs.getString(9)+"</h2>");
 			out.println("<table cellpadding='6'>");
-				out.println("<tr>");
-					out.println("<td><b>Name: </b></td>");
-					out.println("<td>Dr. "+rs.getString(8)+" "+rs.getString(9)+"</td>");
-				out.println("</tr>");
-				
-				out.println("<tr>");
-					out.println("<td><b>Sex: </b></td>");
-					out.println("<td>"+rs.getString(1)+"</td>");
-				out.println("</tr>");
-				
 				out.println("<tr>");
 				out.println("<td><b>Age: </b></td>");
 				out.println("<td>"+rs.getString(2)+"</td>");
@@ -131,11 +110,7 @@ a{
 				out.println("<td><b>Experience: </b></td>");
 				out.println("<td>"+rs.getString(7)+"</td>");
 			out.println("</tr>");
-				out.println("</table>");
-				out.println("</div>");
 				
-				out.println("<div class='right'>");
-				out.println("<table cellpadding='6'>");
 				out.println("<tr>");
 					out.println("<td><b>Education: </b></td>");
 					out.println("<td>"+rs.getString(4)+"</td>");
@@ -164,7 +139,6 @@ a{
 				out.println("</tr>");
 				
 			out.println("</table>");
-			out.println("</div>");
 		}
 	}
 	catch(Exception e){
