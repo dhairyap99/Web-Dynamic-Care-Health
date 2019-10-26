@@ -63,13 +63,14 @@ border-collapse:collapse;
 </style>
 <body>
 <div class="title">
-		<h2 style="font-family: Verdana">Today's Schedule</h2>
+		<h2 style="font-family: Verdana">Schedule</h2>
 		<hr>
 	</div>
 <table cellpadding="6">
 <tr class="bold" style="border-bottom:1px solid black">
 <td>Booking Id</td>
 <td>Patient Name</td>
+<td>Date</td>
 <td>Time</td>
 <td>Reason</td>
 </tr>
@@ -87,24 +88,29 @@ Class.forName("com.mysql.jdbc.Driver");
 con=DriverManager.getConnection("jdbc:mysql://localhost/dchealth?serverTimezone=UTC","root","");
 st=con.createStatement();
 
-rs=st.executeQuery("SELECT booking.bookingid,users.fname,users.lname,booking.time,booking.reason,users.uname "
+rs=st.executeQuery("SELECT booking.bookingid,users.fname,users.lname,booking.date,booking.time,booking.reason,users.uname "
 		+"FROM `booking` INNER JOIN `users` "
 		+"ON booking.pname=users.uname "
-		+"WHERE booking.dname='"+uname+"' and booking.date='"+today+"' and booking.status=1 "
+		+"WHERE booking.dname='"+uname+"' and booking.date>NOW() and booking.date<DATE_ADD(NOW(),INTERVAL 1 MONTH) and booking.status=1 "
 		+"ORDER BY booking.date,booking.time");
 while(rs.next()){
 	pname=rs.getString(6);
 	out.println("<tr>");
 	out.println("<td>"+rs.getString(1)+"</td>");
-	out.println("<td><a href=\"ShowProfilePatient1.jsp?uname="+rs.getString(6)+"\">"+rs.getString(2)+" "+rs.getString(3)+"</a></td>");
+	out.println("<td><a href=\"ShowProfilePatient1.jsp?uname="+rs.getString(7)+"\">"+rs.getString(2)+" "+rs.getString(3)+"</a></td>");
 	
-	String timeInString=rs.getString(4); 
-	SimpleDateFormat formatter = new SimpleDateFormat("KK:mm a");
-	Date current = sd.parse(timeInString);
+	String dateInString=rs.getString(4); 
+	SimpleDateFormat formatter = new SimpleDateFormat("EEEE, MMM dd, yyyy");
+	Date current = sdf.parse(dateInString);
     out.println("<td>"+formatter.format(current)+"</td>");
 
+    String timeInString=rs.getString(5); 
+	SimpleDateFormat formatter1 = new SimpleDateFormat("KK:mm a");
+	Date current1 = sd.parse(timeInString);
+    out.println("<td>"+formatter1.format(current1)+"</td>");
 
-	out.println("<td>"+rs.getString(5)+"</td>");
+
+	out.println("<td>"+rs.getString(6)+"</td>");
 	out.println("</tr>");
 }
 %>
