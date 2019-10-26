@@ -85,10 +85,11 @@ try{
 	st2=con2.createStatement();
 	int row2=st2.executeUpdate("INSERT INTO `booking`(`bookingid`, `pname`, `dname`, `date`, `shift`, `reason`) VALUES ('"
 	+b+"','"+p+"','"+user+"','"+date+"','"+t+"','"+r+"')");
-	%>
 	
-	<%@ include file="HomePagePatient.jsp"%>
-<%}
+	String redirectURL = "/DynamiCare_Health/HomePagePatient1.jsp?user="+p;
+	session.setAttribute("msg","Booking Succesful. Your Booking Id is "+b);
+    response.sendRedirect(redirectURL);
+    }
 	else {
 		String redirectURL = "/DynamiCare_Health/HomePagePatient1.jsp?user="+p;
 		session.setAttribute("msg","Insufficient Balance");

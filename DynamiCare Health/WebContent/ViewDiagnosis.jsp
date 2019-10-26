@@ -91,7 +91,7 @@ st=con.createStatement();
 rs=st.executeQuery("SELECT users.fname,users.lname,booking.date,booking.time,booking.reason,users.uname "
 		+"FROM `booking` INNER JOIN `users` "
 		+"ON booking.dname=users.uname WHERE "
-		+"booking.pname='"+uname+"' and booking.status=1 and booking.date<'2019-11-20' "
+		+"booking.pname='"+uname+"' and booking.status=1 and booking.date<'"+today+"' "
 		+"ORDER BY booking.date,booking.time");
 while(rs.next()){
 	out.println("<tr>");
