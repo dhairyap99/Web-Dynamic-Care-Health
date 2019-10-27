@@ -65,16 +65,26 @@ td b {
 td {
 	padding: 10px;
 }
+
+img{
+height:50px;
+width:50px;
+position:absolute;
+right:17px;
+top:24px;
+}
 </style>
 </head>
 <body>
-	<div class="title">
-		<h2 style="font-family: Verdana">Emergency Contacts</h2>
-		<hr>
-	</div>
 	<%
 		String username=(String)session.getAttribute("user");
-		
+	%>
+	<div class="title">
+		<h2 style="font-family: Verdana">Emergency Contacts</h2>
+		<a href="UpdateContactsPat.jsp?user=<%= username %>"><img src="images/edit.png"></a>
+		<hr>
+	</div>
+	<%	
 		try {
 		Class.forName("com.mysql.jdbc.Driver");
 		con=DriverManager.getConnection("jdbc:mysql://localhost/dchealth?serverTimezone=UTC","root","");

@@ -66,16 +66,28 @@ td b {
 td {
 	padding: 10px;
 }
+
+img{
+height:50px;
+width:50px;
+position:absolute;
+right:17px;
+top:24px;
+}
 </style>
 </head>
 <body>
-	<div class="title">
+
+	<%
+		String username=(String)session.getAttribute("user");
+	%>
+		<div class="title">
 		<h2 style="font-family: Verdana">Complete Details</h2>
+		<a href="UpdateDetailsPat.jsp?user=<%= username %>"><img src="images/edit.png"></a>
 		<hr>
 	</div>
 
 	<%
-		String username=(String)session.getAttribute("user");
 		DecimalFormat format = new DecimalFormat("#0.000");
 		try {
 		Class.forName("com.mysql.jdbc.Driver");
