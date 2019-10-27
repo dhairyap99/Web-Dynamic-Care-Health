@@ -9,6 +9,12 @@
 	href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
 <!-- STYLE CSS -->
 <link rel="stylesheet" href="css/style.css">
+<style>
+a {
+	text-decoration: none;
+	color: black;
+}
+</style>
 </head>
 <body>
 	<%
@@ -34,6 +40,8 @@
 				<button>
 					Log in <i class="zmdi zmdi-arrow-right"></i>
 				</button>
+				
+				<a href="ForgotPassword.jsp"><h4 align="middle">Forgot Password ?</h4></a><br>
 				<h4 align="middle">Sign-up Instead ?</h4>
 				<button formaction="SignUpPatient.html">
 					Sign-up <i class="zmdi zmdi-arrow-right"></i>

@@ -70,7 +70,8 @@ try{
 	}
 	buf1.append(Long.toString((int) encodedPassword1[i] & 0xff, 16));
 	}
-	String cpass=buf1.toString();	
+	String cpass=buf1.toString();
+	
 	if (pass.equals(cpass)){
 		int row=st.executeUpdate("insert into users values('"+first+"','"+last+"','"+email+"','"+user+"','"+pass+"','Doctor')");
 		String subject="Welcome to DynamiCare Health Community";
