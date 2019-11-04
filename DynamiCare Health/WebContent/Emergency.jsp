@@ -8,7 +8,7 @@
 Connection con;
 Statement st;
 ResultSet rs;
-float weight,height,bmi;
+float wt,ht,bmi;
 %>
 <!DOCTYPE html>
 <html>
