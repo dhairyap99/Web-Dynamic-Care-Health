@@ -53,9 +53,10 @@ catch (Exception e) {
 e.printStackTrace(response.getWriter());
 }
 
+	session.setAttribute("msg",null);
+	String redirectURL = "/DynamiCare_Health/HomePageDoctor.jsp?user="+pname;
+	response.sendRedirect(redirectURL);
 %>	
 
-
-	<%@ include file="HomePageDoctor.jsp"%>
 		</body>
 		</html>

@@ -48,9 +48,11 @@ ResultSet rs;
 	
 	while(rs.next()){
 		if (rs.getString(1).equals(pass)){
-		if (rs.getString(2).equals("Doctor")){%>
-<%@ include file="HomePageDoctor.jsp"%>
-<%}
+		if (rs.getString(2).equals("Doctor")){
+						session.setAttribute("msg",null);
+						String redirectURL = "/DynamiCare_Health/HomePageDoctor.jsp?user="+user;
+						response.sendRedirect(redirectURL);
+						}
 		else {
 		String redirectURL = "/DynamiCare_Health/HomePagePatient.jsp?user="+user;
 	session.setAttribute("msg",null);

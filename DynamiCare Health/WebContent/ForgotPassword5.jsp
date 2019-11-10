@@ -78,7 +78,7 @@
 					}
 					else{
 						session.setAttribute("msg","Password Updated Succesfully");
-						String redirectURL = "/DynamiCare_Health/HomePageDoctor1.jsp?user="+uname;
+						String redirectURL = "/DynamiCare_Health/HomePageDoctor.jsp?user="+uname;
 						response.sendRedirect(redirectURL);
 					}
 				}
