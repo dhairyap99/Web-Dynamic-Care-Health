@@ -36,8 +36,8 @@ try{
 	
 	int row1=st.executeUpdate("UPDATE `patientdetails` SET `phone`='"+ph+"' WHERE `username`='"+pname+"'");
 	
-	String redirectURL = "/DynamiCare_Health/HomePagePatient1.jsp?user="+pname;
-	session.setAttribute("msg","Profile Updated Successfully");
+	String redirectURL = "/DynamiCare_Health/HomePagePatient.jsp?user="+pname;
+	session.setAttribute("msg","Contacts Updated Successfully");
     response.sendRedirect(redirectURL);
 }
 catch(Exception e){

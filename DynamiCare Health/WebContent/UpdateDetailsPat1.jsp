@@ -36,7 +36,7 @@ try{
 			+"',`famhis`='"+fhis+"',`alhis`='"+alhis+"',`majil`='"+mil+"',`bg`='"+blg+"' WHERE `username`='"+pname
 			+"'");
 	
-	String redirectURL = "/DynamiCare_Health/HomePagePatient1.jsp?user="+pname;
+	String redirectURL = "/DynamiCare_Health/HomePagePatient.jsp?user="+pname;
 	session.setAttribute("msg","Profile Updated Successfully");
     response.sendRedirect(redirectURL);
 }

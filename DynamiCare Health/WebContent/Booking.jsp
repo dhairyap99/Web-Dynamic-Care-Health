@@ -113,7 +113,7 @@ c.add(Calendar.DATE, 30);
 max = sdf.format(c.getTime());
 %>
 	<div class="title">
-		<h2 style="font-family: Verdana">Build Profile</h2>
+		<h2 style="font-family: Verdana">Enter Booking Details</h2>
 		<hr>
 	</div>
 	<div class="form">
