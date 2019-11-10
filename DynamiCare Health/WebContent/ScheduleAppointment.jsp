@@ -66,9 +66,9 @@ try {
 	
 	msg+=tString+" on "+dString+".\nYour booking id is "+b+".";
 	Mailer.send(email, subject, msg);
-	session.setAttribute("user",user);%>
-	<%@ include file="AppointmentPat.jsp"%>
-	<%}
+	session.setAttribute("user",user);
+	response.sendRedirect("AppointmentPat.jsp");
+	}
 catch(Exception e){
 	out.println(e);
 }

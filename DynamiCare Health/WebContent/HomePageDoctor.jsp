@@ -103,8 +103,12 @@ a {
 </head>
 
 <body>
-
-<%if (session.getAttribute("msg")!=null){
+<%
+response.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
+if (session.getAttribute("user")==null){
+response.sendRedirect("Login1.jsp");	
+}
+if (session.getAttribute("msg")!=null){
 	String message=session.getAttribute("msg").toString();
 	out.println("<script>alert(\""+message+"\")</script>");
 }
@@ -116,7 +120,7 @@ a {
 				<a href="AppointmentPat.jsp"> Schedule Appointment</a>
 				<a href="ViewSchedule.jsp"> View Schedule</a>
 				<a href="Payments.jsp"> Payments </a>
-				<a href="Login.html" style="float:right;">Logout</a>
+				<a href="Logout.jsp" style="float:right;">Logout</a>
 		</div>
 	</center>
 	

@@ -18,8 +18,10 @@ a {
 </head>
 <body>
 	<%
+	if (session.getAttribute("msg")!=null){
 	String message=session.getAttribute("msg").toString();
 	out.println("<script>alert(\""+message+"\")</script>");
+	}
 	%>
 	<div class="wrapper"
 		style="background-image: url('images/bg_registration.jpg');">

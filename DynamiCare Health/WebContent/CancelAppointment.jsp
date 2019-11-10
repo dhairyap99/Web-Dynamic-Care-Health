@@ -74,9 +74,9 @@ try {
 	String msg="Dear "+pf+" "+pl+",\nSorry to inform you that your appointment with Dr. "+df+" "+dl+" has been cancelled. \n";
 	msg+="Rs. "+charges+" has been refunded to your account.";
 	Mailer.send(email, subject, msg);	
-	session.setAttribute("user",user);%>
-	<%@ include file="AppointmentPat.jsp"%>
-<%}
+	session.setAttribute("user",user);
+	response.sendRedirect("AppointmentPat.jsp");
+	}
 catch(Exception e){
 	out.println(e);
 }
