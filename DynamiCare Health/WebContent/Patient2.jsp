@@ -56,7 +56,8 @@ String pname,ht,wt,sex,age,ph,fhis,alhis,mil,ename1,ename2,eph1,eph2,rel1,rel2,b
 catch (Exception e) {
 e.printStackTrace(response.getWriter());
 }
-	String redirectURL = "/DynamiCare_Health/HomePagePatient.jsp?user="+pname;
+	String redirectURL = "/DynamiCare_Health/HomePagePatient.jsp";
+	session.setAttribute("user",pname);
 	session.setAttribute("msg",null);
     response.sendRedirect(redirectURL);
 %>

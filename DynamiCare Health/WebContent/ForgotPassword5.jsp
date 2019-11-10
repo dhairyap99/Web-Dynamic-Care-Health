@@ -73,12 +73,14 @@
 				while (rs.next()){
 					if (rs.getString(1).equals("Patient")){
 						session.setAttribute("msg","Password Updated Succesfully");
-						String redirectURL = "/DynamiCare_Health/HomePagePatient.jsp?user="+uname;
+						session.setAttribute("user",uname);
+						String redirectURL = "/DynamiCare_Health/HomePagePatient.jsp";
 						response.sendRedirect(redirectURL);
 					}
 					else{
 						session.setAttribute("msg","Password Updated Succesfully");
-						String redirectURL = "/DynamiCare_Health/HomePageDoctor.jsp?user="+uname;
+						session.setAttribute("user",uname);
+						String redirectURL = "/DynamiCare_Health/HomePageDoctor.jsp";
 						response.sendRedirect(redirectURL);
 					}
 				}

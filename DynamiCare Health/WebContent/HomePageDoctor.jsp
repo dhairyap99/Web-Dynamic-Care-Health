@@ -18,17 +18,17 @@ String us,se,ag,p,sp;
 <title>DynamiCare Health</title>
 <style type="text/css">
 #userdetails {
-	border: 1px solid black;
+border: 1px solid black;
 	background-color: white;
 	color: black;
 	padding: 6px;
 	border-radius: 20px;
 	font-family: helvetica;
-	position: absolute;
+	position: relative;
 	width: 40%;
-	left: 55%;
-	height: 62%;
-	top: 12.3%;
+	left:700px;
+	height:350px;
+	top: 80px;
 }
 
 .icons {
@@ -43,12 +43,11 @@ a {
 }
 
 .back {
-	width: 99%;
+	width: 100%;
 	position: absolute;
 	z-index: -1;
-	border-radius: 5px;
-	left: 0.5%;
-	top:10%;
+	left: 0%;
+	top:48px;
 }
 
 .head {
@@ -59,7 +58,7 @@ a {
 	height: 76%;
 	color: black;
 	vertical-align: middle;
-	top:10%;
+	top:10%
 }
 
 .profile {
@@ -68,7 +67,7 @@ a {
 
 .text {
 	position: relative;
-	top: 10%;
+	top: 45px;
 	font-size: 90px;
 	font-weight: bolder;
 }
@@ -76,6 +75,10 @@ a {
 .topnav {
 	overflow: hidden;
 	background-color: #333;
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;
 }
 
 .topnav a {
@@ -124,7 +127,7 @@ a {
 
 	st2=con2.createStatement();
 	
-	us=request.getParameter("user");
+	us=session.getAttribute("user").toString();
 	
 	rs2=st2.executeQuery("SELECT `sex`,`age`,`phone`,`specification` FROM `doctordetails` WHERE `username`='"+us+"'");
 	

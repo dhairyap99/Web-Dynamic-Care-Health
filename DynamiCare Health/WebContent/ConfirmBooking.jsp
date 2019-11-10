@@ -86,12 +86,14 @@ try{
 	int row2=st2.executeUpdate("INSERT INTO `booking`(`bookingid`, `pname`, `dname`, `date`, `shift`, `reason`) VALUES ('"
 	+b+"','"+p+"','"+user+"','"+date+"','"+t+"','"+r+"')");
 	
-	String redirectURL = "/DynamiCare_Health/HomePagePatient.jsp?user="+p;
+	String redirectURL = "/DynamiCare_Health/HomePagePatient.jsp";
+	session.setAttribute("user",p);
 	session.setAttribute("msg","Booking Successful. Your Booking Id is "+b);
     response.sendRedirect(redirectURL);
     }
 	else {
-		String redirectURL = "/DynamiCare_Health/HomePagePatient.jsp?user="+p;
+		String redirectURL = "/DynamiCare_Health/HomePagePatient.jsp";
+		session.setAttribute("user",p);
 		session.setAttribute("msg","Insufficient Balance");
 	    response.sendRedirect(redirectURL);
 	    }}

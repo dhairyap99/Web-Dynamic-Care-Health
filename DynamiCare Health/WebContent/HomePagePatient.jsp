@@ -24,11 +24,11 @@ String h,w,a,s,u;
 	padding: 6px;
 	border-radius: 20px;
 	font-family: helvetica;
-	position: absolute;
+	position: relative;
 	width: 40%;
-	left: 55%;
-	height: 62%;
-	top: 12.3%;
+	left:300px;
+	height:350px;
+	top: 80px;
 }
 
 .icons {
@@ -43,12 +43,11 @@ a {
 }
 
 .back {
-	width: 99%;
+	width: 100%;
 	position: absolute;
 	z-index: -1;
-	border-radius: 5px;
-	left: 0.5%;
-	top:10%;
+	left: 0%;
+	top:48px;
 }
 
 .head {
@@ -68,7 +67,7 @@ a {
 
 .text {
 	position: relative;
-	top: 10%;
+	top: 45px;
 	font-size: 90px;
 	font-weight: bolder;
 }
@@ -76,6 +75,10 @@ a {
 .topnav {
 	overflow: hidden;
 	background-color: #333;
+	position:absolute;
+	top:0px;
+	width:100%;
+	left:0px;
 }
 
 .topnav a {
@@ -117,13 +120,14 @@ if (session.getAttribute("msg")!=null){
 				<a href="Payments.jsp"> Payments </a>
 				<a href="Login.html" style="float:right;">Logout</a>
 		</div>
-	<%try {
+	<%
+	try {
 	Class.forName("com.mysql.jdbc.Driver");
 	con1=DriverManager.getConnection("jdbc:mysql://localhost/dchealth?serverTimezone=UTC","root","");
 
 	st1=con1.createStatement();
 	
-	u=request.getParameter("user");
+	u=session.getAttribute("user").toString();
 	
 	rs1=st1.executeQuery("SELECT `height`,`weight`,`sex`,`age` FROM `patientdetails` WHERE `username`='"+u+"' LIMIT 1");
 	

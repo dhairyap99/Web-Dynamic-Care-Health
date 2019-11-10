@@ -50,11 +50,13 @@ ResultSet rs;
 		if (rs.getString(1).equals(pass)){
 		if (rs.getString(2).equals("Doctor")){
 						session.setAttribute("msg",null);
-						String redirectURL = "/DynamiCare_Health/HomePageDoctor.jsp?user="+user;
+						session.setAttribute("user",user);
+						String redirectURL = "/DynamiCare_Health/HomePageDoctor.jsp";
 						response.sendRedirect(redirectURL);
 						}
 		else {
-		String redirectURL = "/DynamiCare_Health/HomePagePatient.jsp?user="+user;
+		String redirectURL = "/DynamiCare_Health/HomePagePatient.jsp";
+		session.setAttribute("user",user);
 	session.setAttribute("msg",null);
     response.sendRedirect(redirectURL);
     }

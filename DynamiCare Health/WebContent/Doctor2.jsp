@@ -54,7 +54,8 @@ e.printStackTrace(response.getWriter());
 }
 
 	session.setAttribute("msg",null);
-	String redirectURL = "/DynamiCare_Health/HomePageDoctor.jsp?user="+pname;
+	session.setAttribute("user",pname);
+	String redirectURL = "/DynamiCare_Health/HomePageDoctor.jsp";
 	response.sendRedirect(redirectURL);
 %>	
 
