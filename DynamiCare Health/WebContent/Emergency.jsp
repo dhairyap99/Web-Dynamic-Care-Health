@@ -8,7 +8,6 @@
 Connection con;
 Statement st;
 ResultSet rs;
-float wt,ht,bmi;
 %>
 <!DOCTYPE html>
 <html>
