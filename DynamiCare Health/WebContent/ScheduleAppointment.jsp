@@ -68,7 +68,7 @@
 			Mailer.send(email, subject, msg);
 			session.setAttribute("msg", subject);
 			session.setAttribute("user", user);
-			response.sendRedirect("AppointmentPat.jsp");
+			response.sendRedirect("AppointmentDoc.jsp");
 		} catch (Exception e) {
 			out.println(e);
 		}

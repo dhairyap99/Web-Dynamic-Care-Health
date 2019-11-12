@@ -76,7 +76,7 @@ try {
 	Mailer.send(email, subject, msg);	
 	session.setAttribute("user",user);
 	session.setAttribute("msg", subject);
-	response.sendRedirect("AppointmentPat.jsp");
+	response.sendRedirect("AppointmentDoc.jsp");
 	}
 catch(Exception e){
 	out.println(e);

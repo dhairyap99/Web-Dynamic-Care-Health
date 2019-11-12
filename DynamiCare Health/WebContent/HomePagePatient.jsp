@@ -119,7 +119,7 @@ if (session.getAttribute("msg")!=null){
 				<a href="" class="active"> DC-Health</a>
 				<a href="DetailsPat.jsp"> View Details</a>
 				<a href="Emergency.jsp"> Emergency Contacts</a>
-				<a href="AppointmentDoc.jsp"> Book Appointment </a>
+				<a href="AppointmentPat.jsp"> Book Appointment </a>
 				<a href="AppointmentHis.jsp"> Appointment History </a>
 				<a href="Payments.jsp"> Payments </a>
 				<a href="Reports.jsp"> Reports </a>
