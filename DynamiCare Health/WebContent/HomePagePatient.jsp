@@ -5,10 +5,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="java.sql.*"%>
 <%!Connection con1;
-Statement st1;
-ResultSet rs1;
-String h,w,a,s,u;
-%>
+	Statement st1;
+	ResultSet rs1;
+	String h, w, a, s, u;%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 	"http://www.w3.org/TR/html4/loose.dtd">
@@ -26,8 +25,8 @@ String h,w,a,s,u;
 	font-family: helvetica;
 	position: relative;
 	width: 40%;
-	left:300px;
-	height:350px;
+	left: 300px;
+	height: 350px;
 	top: 80px;
 }
 
@@ -47,7 +46,7 @@ a {
 	position: absolute;
 	z-index: -1;
 	left: 0%;
-	top:48px;
+	top: 48px;
 }
 
 .head {
@@ -58,7 +57,7 @@ a {
 	height: 76%;
 	color: black;
 	vertical-align: middle;
-	top:10%
+	top: 10%
 }
 
 .profile {
@@ -75,10 +74,10 @@ a {
 .topnav {
 	overflow: hidden;
 	background-color: #333;
-	position:absolute;
-	top:0px;
-	width:100%;
-	left:0px;
+	position: absolute;
+	top: 0px;
+	width: 100%;
+	left: 0px;
 }
 
 .topnav a {
@@ -99,103 +98,162 @@ a {
 	background-color: #4CAF50;
 	color: white;
 }
+
+.dropbtn {
+	background-color: #333;
+	color: #f2f2f2;
+	padding: 16px;
+	font-size: 17px;
+	border: none;
+	padding: 14px 16px;
+	font-family:serif;
+}
+
+.dropdown {
+	position: absolute;
+	display: inline-block;
+	top:0px;
+	left:400px;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f1f1f1;
+	min-width: 220px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.dropdown-content a {
+	color: black;
+	text-decoration: none;
+	display: block;
+	padding:12px 16px;
+	font-size:16px;
+}
+
+.dropdown-content a:hover {
+	background-color: #ddd;
+	font-weight:bold;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown:hover .dropbtn {
+	background-color: #ddd;
+	color:black;
+}
 </style>
 </head>
 
 <body>
 
-<%
-response.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
-if (session.getAttribute("user")==null){
-response.sendRedirect("Login1.jsp");	
-}
-if (session.getAttribute("msg")!=null){
-	String message=session.getAttribute("msg").toString();
-	out.println("<script>alert(\""+message+"\")</script>");
-}
+	<%
+		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+		if (session.getAttribute("user") == null) {
+			response.sendRedirect("Login1.jsp");
+		}
+		if (session.getAttribute("msg") != null) {
+			String message = session.getAttribute("msg").toString();
+			out.println("<script>alert(\"" + message + "\")</script>");
+		}
 	%>
 	<center>
-		<div class="topnav">			
-				<a href="" class="active"> DC-Health</a>
-				<a href="DetailsPat.jsp"> View Details</a>
-				<a href="Emergency.jsp"> Emergency Contacts</a>
-				<a href="AppointmentPat.jsp"> Book Appointment </a>
-				<a href="AppointmentHis.jsp"> Appointment History </a>
-				<a href="Payments.jsp"> Payments </a>
-				<a href="Reports.jsp"> Reports </a>
-				<a href="Logout.jsp" style="float:right;">Logout</a>
+		<div class="topnav">
+			<a href="" class="active"> DC-Health</a> 
+			<a href="DetailsPat.jsp">View Details</a> 
+			<a href="Emergency.jsp"> Emergency Contacts</a> 
+			<a href="#">Appointment</a>
+			<a href="Payments.jsp"> Payments </a> 
+			<a href="Reports.jsp">Reports </a> 
+			<a href="Logout.jsp" style="float: right;">Logout</a>
 		</div>
-	<%
-	try {
-	Class.forName("com.mysql.jdbc.Driver");
-	con1=DriverManager.getConnection("jdbc:mysql://localhost/dchealth?serverTimezone=UTC","root","");
 
-	st1=con1.createStatement();
-	
-	u=session.getAttribute("user").toString();
-	
-	rs1=st1.executeQuery("SELECT `height`,`weight`,`sex`,`age` FROM `patientdetails` WHERE `username`='"+u+"' LIMIT 1");
-	
-	while(rs1.next()){
-		h=rs1.getString(1);
-		w=rs1.getString(2);
-		s=rs1.getString(3);
-		a=rs1.getString(4);
-	}
-}
-catch(Exception e){
-	out.println(e);
-}
-%>
-	<img class="back" alt="back" src="images/lhc.jpg">
+		<div class="dropdown">
+			<button class="dropbtn">Appointment</button>
+			<div class="dropdown-content">
+				<a href="AppointmentPat.jsp">Book Appointment</a> 
+				<a href="AppointmentCan.jsp">Cancel Appointment</a>
+				<a href="AppointmentResch.jsp">Reschedule Appointment</a>
+				<a href="AppointmentHis.jsp">Appointment History</a>
+			</div>
+		</div>
+		
+		<%
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				con1 = DriverManager.getConnection("jdbc:mysql://localhost/dchealth?serverTimezone=UTC", "root", "");
 
-	<div class="head">
-		<span class="text">Welcome to <br>DynamiCare Health
-		</span>
-	</div>
+				st1 = con1.createStatement();
 
-	<div id="userdetails">
-		<center>
-			<% if (s.equals("Male")){ 
-			out.println("<img src='images/profileMale.png' class='profile'/>");
-		}
-		else{
-			out.println("<img src='images/profileFemale.png' class='profile'/>");
-		}%>
-			<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User Details</h2>
-			<table style="font-family: verdana;" cellpadding="6">
-				<tr>
-					<td><b>User Name:</b></td>
-					<td><%= u %></td>
-				</tr>
+				u = session.getAttribute("user").toString();
 
-				<tr>
-					<td><b>Age: </b></td>
-					<td><%= a %></td>
-				</tr>
+				rs1 = st1.executeQuery("SELECT `height`,`weight`,`sex`,`age` FROM `patientdetails` WHERE `username`='"
+						+ u + "' LIMIT 1");
 
-				<tr>
-					<td><b>Sex: </b>
-					<td><%= s %></td>
-				</tr>
+				while (rs1.next()) {
+					h = rs1.getString(1);
+					w = rs1.getString(2);
+					s = rs1.getString(3);
+					a = rs1.getString(4);
+				}
+			} catch (Exception e) {
+				out.println(e);
+			}
+		%>
+		<img class="back" alt="back" src="images/lhc.jpg">
 
-				<tr>
-					<td><b>Height: </b>
-					<td><%= h %></td>
-				</tr>
+		<div class="head">
+			<span class="text">Welcome to <br>DynamiCare Health
+			</span>
+		</div>
 
-				<tr>
-					<td><b>Weight: </b>
-					<td><%= w %></td>
-				</tr>
-			</table>
-		</center>
-	</div>
+		<div id="userdetails">
+			<center>
+				<%
+					if (s.equals("Male")) {
+						out.println("<img src='images/profileMale.png' class='profile'/>");
+					} else {
+						out.println("<img src='images/profileFemale.png' class='profile'/>");
+					}
+				%>
+				<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User Details</h2>
+				<table style="font-family: verdana;" cellpadding="6">
+					<tr>
+						<td><b>User Name:</b></td>
+						<td><%=u%></td>
+					</tr>
+
+					<tr>
+						<td><b>Age: </b></td>
+						<td><%=a%></td>
+					</tr>
+
+					<tr>
+						<td><b>Sex: </b>
+						<td><%=s%></td>
+					</tr>
+
+					<tr>
+						<td><b>Height: </b>
+						<td><%=h%></td>
+					</tr>
+
+					<tr>
+						<td><b>Weight: </b>
+						<td><%=w%></td>
+					</tr>
+				</table>
+			</center>
+		</div>
 
 	</center>
 
 	<%
-			session.setAttribute("user",u);
-			%>
+		session.setAttribute("user", u);
+	%>
 </body>
 </html>

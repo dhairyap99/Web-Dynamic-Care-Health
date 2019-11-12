@@ -16,9 +16,18 @@ String uname;
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Appointment History</title>
+<title>Cancel Appointment</title>
 </head>
 <style>
+a {
+	text-decoration: underline;
+	color: #eb1736;
+}
+
+a:hover{
+	color: #0842B8;
+}
+
 body{
 		background:  #5252d4;
 	}
@@ -57,7 +66,7 @@ border-collapse:collapse;
 </style>
 <body>
 <div class="title">
-		<h2 style="font-family: Verdana">Appointment History</h2>
+		<h2 style="font-family: Verdana">Cancel Appointment</h2>
 		<hr>
 	</div>
 <table cellpadding="6">
@@ -67,8 +76,6 @@ border-collapse:collapse;
 <td>Date</td>
 <td>Time</td>
 <td>Location</td>
-<td>Status</td>
-<td>Reason</td>
 </tr>
 <%
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -78,18 +85,18 @@ c.setTime(d);
 String today = sdf.format(d);
 
 uname=session.getAttribute("user").toString(); 
+session.setAttribute("user",uname);
 Class.forName("com.mysql.jdbc.Driver");
 con=DriverManager.getConnection("jdbc:mysql://localhost/dchealth?serverTimezone=UTC","root","");
 st=con.createStatement();
-rs=st.executeQuery("SELECT booking.bookingid,users.fname,users.lname,booking.date,booking.time,booking.status,booking.reason, "
-		+"doctordetails.location "
+rs=st.executeQuery("SELECT booking.bookingid,users.fname,users.lname,booking.date,booking.time,booking.status,doctordetails.location "
 		+"FROM `booking` INNER JOIN `users` INNER JOIN `doctordetails` "
 		+"ON booking.dname=users.uname and booking.dname=doctordetails.username "
-		+"WHERE booking.pname='"+uname+"' "
+		+"WHERE booking.pname='"+uname+"'and booking.date>'"+today+"' and booking.status=1 "
 		+"ORDER BY booking.date");
 while(rs.next()){
 	out.println("<tr>");
-	out.println("<td>"+rs.getString(1)+"</td>");
+	out.println("<td><a href=\"AppointmentCan1.jsp?bid="+rs.getString(1)+"\">"+rs.getString(1)+"</a></td>");
 	out.println("<td>Dr."+rs.getString(2)+" "+rs.getString(3)+"</td>");
 	
 	String dateInString=rs.getString(4); 
@@ -108,17 +115,8 @@ while(rs.next()){
 	    out.println("<td>"+formatter1.format(current)+"</td>");
 	}
 
-	out.println("<td>"+rs.getString(8)+"</td>");
-	
-	switch(rs.getString(6)){
-	case "0": out.println("<td>No Status</td>");
-	break;
-	case "1": out.println("<td>Confirmed</td>");
-	break;
-	case "-1": out.println("<td>Cancelled</td>");
-	break;
-	}
 	out.println("<td>"+rs.getString(7)+"</td>");
+	
 	out.println("</tr>");
 }
 %>
