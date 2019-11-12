@@ -11,7 +11,7 @@ ResultSet rs;
 %>
 <html>
 <head>
-<title>Other Details</title>
+<title>Update Details</title>
 <style type="text/css">
 body {
 	background: #5252d4;
@@ -48,7 +48,7 @@ body {
 
 .centered {
 	position: absolute;
-	top: 78%;
+	top: 82%;
 	left: 0.6%;
 	height: 8%;
 	width: 98.7%;
@@ -83,7 +83,7 @@ td {
 		rs=st.executeQuery("SELECT * FROM `doctordetails` WHERE `username`='"+username+"' LIMIT 1");
 		while (rs.next()){%>
 	<div class="title">
-		<h2 style="font-family: Verdana">Build Profile</h2>
+		<h2 style="font-family: Verdana">Update Profile</h2>
 		<hr>
 	</div>
 	<div class="form">

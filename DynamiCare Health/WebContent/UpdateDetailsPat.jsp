@@ -11,7 +11,7 @@ ResultSet rs;
 %>
 <html>
 <head>
-<title>Other Details</title>
+<title>Update Details</title>
 <style type="text/css">
 body {
 	background: #5252d4;

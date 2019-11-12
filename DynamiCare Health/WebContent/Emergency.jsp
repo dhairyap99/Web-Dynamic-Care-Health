@@ -13,7 +13,7 @@ ResultSet rs;
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Emergency Contacts</title>
+<title>Contacts</title>
 <style>
 body {
 	background: #5252d4;

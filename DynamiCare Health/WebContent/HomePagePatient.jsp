@@ -122,6 +122,7 @@ if (session.getAttribute("msg")!=null){
 				<a href="AppointmentDoc.jsp"> Book Appointment </a>
 				<a href="AppointmentHis.jsp"> Appointment History </a>
 				<a href="Payments.jsp"> Payments </a>
+				<a href="Reports.jsp"> Reports </a>
 				<a href="Logout.jsp" style="float:right;">Logout</a>
 		</div>
 	<%

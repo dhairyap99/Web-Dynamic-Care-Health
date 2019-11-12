@@ -2,6 +2,7 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.ResultSet"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%!Connection con;
@@ -12,28 +13,25 @@ ResultSet rs;%>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Book Appointment</title>
+<title>Reports</title>
 <style type="text/css">
 .grid-container {
 	display: grid;
-	grid-template-columns: 428px 428px 428px;
+	grid-template-columns: 255px 255px 255px 255px 255px;
 	grid-template-rows: auto;
 	grid-gap: 10px;
 	padding: 10px;
 }
 
 .grid-container>div {
-	background-color: #3A23B0;
+	background-color: #FFFFFF;
 	text-align: center;
 	padding-top: 20px;
 	font-size: 30px;
-	border: 1px solid #3A23B0;
+	border: 1px solid black;
 	border-radius: 25px;
-	height: 90px;
-	color: white;
 }
 a {
-	color: white;
 	text-decoration: none;
 	position: relative;
 	top: 20%;
@@ -41,22 +39,26 @@ a {
 </style>
 </head>
 <body>
-<h2 style="font-family: verdana">Select Doctor Type</h2>
+<h2 style="font-family: verdana">Reports</h2>
 	<div class="grid-container">
 		<%
-			session.setAttribute("uname", session.getAttribute("user").toString());
+			String uname=session.getAttribute("user").toString();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat formatter = new SimpleDateFormat("MMM dd, yyyy");
+		
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				con = DriverManager.getConnection("jdbc:mysql://localhost/dchealth?serverTimezone=UTC", "root", "");
 
 				st = con.createStatement();
 
-				rs = st.executeQuery("SELECT DISTINCT specification FROM `doctordetails` ORDER by specification");
+				rs = st.executeQuery("SELECT `bookingid`,`date` FROM `booking` WHERE `pname`='"+uname+"' and `diagnosed`=true order by `date`");
 				while (rs.next()) {
 		%>
 		<div>
-			<a href=<%="\"SelectDoctor.jsp?type=" + rs.getString(1) + "\""%>> <%=rs.getString(1)%>
-			</a>
+			<a href=<%="\"ViewPdf.jsp?bid=" + rs.getString(1) + "\""%>><img src="images/pdf.png"></a>
+			<h2></h2>
+			<p style="font-style: oblique; font-size: 0.7em"><%= formatter.format(sdf.parse(rs.getString(2))) %></p>
 		</div>
 		<%
 			}

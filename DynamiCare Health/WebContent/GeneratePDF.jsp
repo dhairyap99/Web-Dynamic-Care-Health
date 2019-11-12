@@ -137,10 +137,9 @@
             Class.forName("com.mysql.jdbc.Driver");
 			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/dchealth?serverTimezone=UTC", "root", "");
             
-			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO `report`(`bookingid`, `reportpdf`, `date`) VALUES (?,?,?)");
+			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO `report`(`bookingid`, `reportpdf`) VALUES (?,?)");
 
             preparedStatement.setString(1, bid);
-            preparedStatement.setString(3, date);
             if (document != null) {
             	ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
         		preparedStatement.setBlob(2, bais);

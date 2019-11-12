@@ -17,7 +17,7 @@ String uname,pname;
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Today's Schedule</title>
+<title>View Schedule</title>
 </head>
 <style>
 body{

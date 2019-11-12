@@ -11,7 +11,7 @@ ResultSet rs;
 %>
 <html>
 <head>
-<title>Other Details</title>
+<title>Update Contacts</title>
 <style type="text/css">
 body {
 	background: #5252d4;
@@ -98,7 +98,7 @@ td {
 				+"WHERE patientdetails.username='"+username+"';");
 		while (rs.next()){%>
 	<div class="title">
-		<h2 style="font-family: Verdana">Update Details</h2>
+		<h2 style="font-family: Verdana">Update Contacts</h2>
 		<hr>
 	</div>
 	<div class="form">
