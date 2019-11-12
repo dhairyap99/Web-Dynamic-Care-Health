@@ -36,7 +36,7 @@ session.setAttribute("otp",session.getAttribute("otp"));
 				</div>
 				<div class="modal-footer no-border">
 					<button type="button" class="btn btn-default" data-dismiss="modal"
-						style="background: #eb1736; color: white;">Close</button>
+						style="background: #eb1736; color: white;" onclick="window.location.href='Login1.jsp'">Close</button>
 				</div>
 			</div>
 

@@ -209,7 +209,8 @@ img {
 				</div>
 				<div class="modal-footer no-border">
 					<button type="button" class="btn btn-default" data-dismiss="modal"
-						style="background: #eb1736; color: white;">Close</button>
+						style="background: #eb1736; color: white;" 
+						onclick="window.location.href='ShowProfilePatient.jsp?uname=<%=username%>&bid=<%= b %>'">Close</button>
 				</div>
 			</div>
 
@@ -232,7 +233,8 @@ img {
 				</div>
 				<div class="modal-footer no-border">
 					<button type="button" class="btn btn-default" data-dismiss="modal"
-						style="background: #eb1736; color: white;">Close</button>
+						style="background: #eb1736; color: white;"
+						onclick="window.location.href='ShowProfilePatient.jsp?uname=<%=username%>&bid=<%= b %>'">Close</button>
 				</div>
 			</div>
 
