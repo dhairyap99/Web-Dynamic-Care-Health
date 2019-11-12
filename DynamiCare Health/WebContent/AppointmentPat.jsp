@@ -37,6 +37,12 @@ a {
 </style>
 </head>
 <body>
+<%
+if (session.getAttribute("msg")!=null){
+	String message=session.getAttribute("msg").toString();
+	out.println("<script>alert(\""+message+"\")</script>");
+}
+%>
 	<h2 style="font-family: verdana">Confirm Appointment</h2>
 	<div class="grid-container">
 		<%

@@ -11,7 +11,7 @@
 <%!Connection con;
 Statement st;
 ResultSet rs;
-String uname;
+String uname,bid;
 %>
 <!DOCTYPE html>
 <html>
@@ -39,8 +39,12 @@ font-family: Verdana;
 }
 
 a {
-	text-decoration: none;
+	text-decoration: underline;
 	color: #eb1736;
+}
+
+a:hover{
+	color: #0842B8;
 }
 
 .bold{
@@ -59,7 +63,7 @@ border-collapse:collapse;
 		border-bottom-left-radius:30px;
 		border-bottom-right-radius:30px;
 	}
-	
+
 </style>
 <body>
 <div class="title">
@@ -70,8 +74,8 @@ border-collapse:collapse;
 <tr class="bold" style="border-bottom:1px solid black">
 <td>Doctor Name</td>
 <td>Date</td>
-<td>Time</td>
 <td>Reason</td>
+<td>Report</td>
 </tr>
 <%
 
@@ -81,35 +85,30 @@ Date d=new Date();
 c.setTime(d);
 String today = sdf.format(d);
 
-SimpleDateFormat sd = new SimpleDateFormat("HH:mm:ss");
-
 uname=request.getParameter("u"); 
 Class.forName("com.mysql.jdbc.Driver");
 con=DriverManager.getConnection("jdbc:mysql://localhost/dchealth?serverTimezone=UTC","root","");
 st=con.createStatement();
 
-rs=st.executeQuery("SELECT users.fname,users.lname,booking.date,booking.time,booking.reason,users.uname "
+rs=st.executeQuery("SELECT users.fname,users.lname,booking.date,booking.reason,booking.bookingid "
 		+"FROM `booking` INNER JOIN `users` "
 		+"ON booking.dname=users.uname WHERE "
-		+"booking.pname='"+uname+"' and booking.status=1 and booking.date<'"+today+"' "
+		+"booking.pname='"+uname+"' and booking.status=1 and booking.date<'"+today+"' and booking.diagnosed=true "
 		+"ORDER BY booking.date,booking.time");
 while(rs.next()){
+	bid=rs.getString(5);
 	out.println("<tr>");
 	
-	out.println("<td><a href=\"ShowProfileDoctor1.jsp?uname="+rs.getString(6)+"\">Dr. "+rs.getString(1)+" "+rs.getString(2)+"</a></td>");
+	out.println("<td>Dr. "+rs.getString(1)+" "+rs.getString(2)+"</td>");
 	
 	String dateInString=rs.getString(3); 
 	SimpleDateFormat formatter = new SimpleDateFormat("EEEE, MMM dd, yyyy");
 	Date date = sdf.parse(dateInString);
     out.println("<td>"+formatter.format(date)+"</td>");
 
-	String timeInString=rs.getString(4); 
-	SimpleDateFormat formatter1 = new SimpleDateFormat("KK:mm a");
-	Date current = sd.parse(timeInString);
-    out.println("<td>"+formatter1.format(current)+"</td>");
-
-
-	out.println("<td>"+rs.getString(5)+"</td>");
+	out.println("<td>"+rs.getString(4)+"</td>");
+	
+	out.println("<td><a href=\"ViewPdf.jsp?bid="+bid+"\">View Report</a></td>");
 	out.println("</tr>");
 }
 %>

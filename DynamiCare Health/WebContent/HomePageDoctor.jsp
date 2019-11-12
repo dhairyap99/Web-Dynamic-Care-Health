@@ -125,6 +125,7 @@ if (session.getAttribute("msg")!=null){
 	</center>
 	
 	<%
+	session.setAttribute("msg",null);
 	try {
 	Class.forName("com.mysql.jdbc.Driver");
 	con2=DriverManager.getConnection("jdbc:mysql://localhost/dchealth?serverTimezone=UTC","root","");

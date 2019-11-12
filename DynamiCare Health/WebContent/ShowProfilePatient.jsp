@@ -175,7 +175,7 @@ img {
 		data-toggle="modal" data-target="#myModal">CONFIRM</button>
 	<button class="button" type="button" value="CANCEL"
 		style="position: absolute; top: 420px; left: 1050px;"
-		onclick="location.href='CancelAppointment.jsp?b=<%=b%>'" id="cancel">CANCEL</button>
+		data-toggle="modal" data-target="#myModal1" id="cancel">CANCEL</button>
 
 
 	<div class="modal fade" id="myModal" role="dialog">
@@ -215,6 +215,30 @@ img {
 
 		</div>
 	</div>
+	
+	<div class="modal fade" id="myModal1" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" style="background: #eb1736; color: white;">
+					<h4 class="modal-title">Cancel Appointment</h4>
+				</div>
+				<div class="modal-body no-border">
+					<form action="CancelAppointment.jsp" action="get">
+						<input type="hidden" name="b" value=<%=b%>> 
+						Are You Sure?    
+						<input type="submit" value="YES">
+					</form>
+
+				</div>
+				<div class="modal-footer no-border">
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						style="background: #eb1736; color: white;">Close</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	
 	<%
 		}
 		} catch (Exception e) {

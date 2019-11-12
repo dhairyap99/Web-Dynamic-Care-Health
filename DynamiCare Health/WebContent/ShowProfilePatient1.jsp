@@ -10,6 +10,7 @@ Connection con;
 Statement st;
 ResultSet rs;
 float weight,height,bmi;
+String bid;
 %>
 <!DOCTYPE html>
 <html>
@@ -151,10 +152,18 @@ img {
 	catch(Exception e){
 	out.println(e);
 }
+		session.setAttribute("docname",session.getAttribute("docname"));
+		bid=request.getParameter("bid");
+		
 %>
-<button class="button" type="button" value="CANCEL" onclick="location.href='ViewDiagnosis.jsp?u=<%=username%>'"
-		style="position: absolute; top: 460px; left: 700px;"
-		id="cancel">VIEW DIAGNOSIS</button>
+
+<button class="button" type="button" value="VIEW" onclick="location.href='ViewDiagnosis.jsp?u=<%=username%>'"
+		style="position: absolute; top: 100px; left: 1050px;" 
+		id="view">VIEW DIAGNOSIS</button>
+<button class="button" type="button" value="VIEW" onclick="location.href='Diagnose.jsp?u=<%=username%>&bid=<%= bid %>'"
+		style="position: absolute; top: 420px; left: 1050px;" 
+		id="view">DIAGNOSE</button>
+		
 
 </body>
 </html>

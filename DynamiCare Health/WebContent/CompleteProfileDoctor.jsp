@@ -37,7 +37,7 @@ body {
 
 .centered {
 	position: absolute;
-	top: 78%;
+	top: 82%;
 	left: 0.6%;
 	height: 8%;
 	width: 98.7%;

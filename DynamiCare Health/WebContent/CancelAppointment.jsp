@@ -75,6 +75,7 @@ try {
 	msg+="Rs. "+charges+" has been refunded to your account.";
 	Mailer.send(email, subject, msg);	
 	session.setAttribute("user",user);
+	session.setAttribute("msg", subject);
 	response.sendRedirect("AppointmentPat.jsp");
 	}
 catch(Exception e){

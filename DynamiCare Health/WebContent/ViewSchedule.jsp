@@ -39,8 +39,12 @@ font-family: Verdana;
 }
 
 a {
-	text-decoration: none;
+	text-decoration: underline;
 	color: #eb1736;
+}
+
+a:hover{
+	color: #0842B8;
 }
 
 .bold{
@@ -91,13 +95,15 @@ st=con.createStatement();
 rs=st.executeQuery("SELECT booking.bookingid,users.fname,users.lname,booking.date,booking.time,booking.reason,users.uname "
 		+"FROM `booking` INNER JOIN `users` "
 		+"ON booking.pname=users.uname "
-		+"WHERE booking.dname='"+uname+"' and booking.date>NOW() and booking.date<DATE_ADD(NOW(),INTERVAL 1 MONTH) and booking.status=1 "
+		+"WHERE booking.dname='"+uname+"' and booking.date>=NOW() and booking.date<DATE_ADD(NOW(),INTERVAL 1 MONTH) "
+		+"and booking.status=1 AND booking.diagnosed=false "
 		+"ORDER BY booking.date,booking.time");
 while(rs.next()){
 	pname=rs.getString(6);
 	out.println("<tr>");
 	out.println("<td>"+rs.getString(1)+"</td>");
-	out.println("<td><a href=\"ShowProfilePatient1.jsp?uname="+rs.getString(7)+"\">"+rs.getString(2)+" "+rs.getString(3)+"</a></td>");
+	session.setAttribute("docname",uname);
+	out.println("<td><a href=\"ShowProfilePatient1.jsp?uname="+rs.getString(7)+"&bid="+rs.getString(1)+"\">"+rs.getString(2)+" "+rs.getString(3)+"</a></td>");
 	
 	String dateInString=rs.getString(4); 
 	SimpleDateFormat formatter = new SimpleDateFormat("EEEE, MMM dd, yyyy");
