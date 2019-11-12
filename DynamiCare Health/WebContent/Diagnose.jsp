@@ -2,14 +2,14 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.ResultSet"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%!
-Connection con1;
-Statement st1,st2;
-ResultSet rs1,rs2;
-String pf,pl,df,dl;
-%>
+	pageEncoding="ISO-8859-1"%>
+<%!Connection con1;
+	Statement st1, st2, st;
+	ResultSet rs1, rs2, rs;
+	String pf, pl, df, dl, date, today;%>
 <html>
 <head>
 <title>Diagnose</title>
@@ -64,7 +64,7 @@ body {
 	left: 38%;
 	border: 2px solid #101357;
 	width: 25%;
-	top:2%;
+	top: 2%;
 	border-radius: 35px;
 }
 
@@ -76,15 +76,32 @@ td {
 </style>
 </head>
 <body>
-<%
+	<%
 String patname=request.getParameter("u");
 String bid=request.getParameter("bid");
 String docname=session.getAttribute("docname").toString();
 String email="";
+SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+Date d=new Date();
+today=sdf.format(d);
 
 try {
 	Class.forName("com.mysql.jdbc.Driver");
 	con1=DriverManager.getConnection("jdbc:mysql://localhost/dchealth?serverTimezone=UTC","root","");
+	
+	st=con1.createStatement();
+	rs=st.executeQuery("SELECT `date` FROM `booking` WHERE `bookingid`='"+bid+"'");
+	
+	while(rs.next()){
+		date=rs.getString(1);
+	}
+	
+	if (!today.equals(date)){
+		session.setAttribute("msg","You cannot diagnose before Booking Date");
+		session.setAttribute("user",docname);
+		String redirectURL = "/DynamiCare_Health/HomePageDoctor.jsp";
+		response.sendRedirect(redirectURL);
+	}
 	
 	st1=con1.createStatement();
 	rs1=st1.executeQuery("SELECT fname,lname,mail FROM users WHERE uname='"+patname+"' Limit 1");
@@ -117,40 +134,45 @@ catch (Exception e){
 			<div class="left">
 				<table cellpadding="6">
 					<tr>
-					<td>Patient Name: </td>
-					<td><input type="text" name="patname" value="<%= pf %> <%= pl %>" readonly="readonly" style="color: #eb1736"></td>
+						<td>Patient Name:</td>
+						<td><input type="text" name="patname"
+							value="<%= pf %> <%= pl %>" readonly="readonly"
+							style="color: #eb1736"></td>
 					</tr>
-					
+
 					<tr>
-					<td>Doctor Name: </td>
-					<td><input type="text" name="docname" value="Dr. <%= df %> <%= dl %>" readonly="readonly" style="color: #eb1736"></td>
+						<td>Doctor Name:</td>
+						<td><input type="text" name="docname"
+							value="Dr. <%= df %> <%= dl %>" readonly="readonly"
+							style="color: #eb1736"></td>
 					</tr>
-					
+
 					<tr>
-					<td>Booking Id: </td>
-					<td><input type="text" name="bid" value=<%= bid %> readonly="readonly" style="color: #eb1736"></td>
+						<td>Booking Id:</td>
+						<td><input type="text" name="bid" value=<%= bid %>
+							readonly="readonly" style="color: #eb1736"></td>
 					</tr>
-					
+
 					<tr>
 						<td>Diagnosis:</td>
 						<td><textarea rows="5" cols="100" name="d"></textarea></td>
 					</tr>
-					
+
 					<tr>
 						<td>Prescription:</td>
 						<td><textarea rows="5" cols="100" name="p"></textarea></td>
 					</tr>
-					
+
 					<tr>
 						<td>Additional Comments:</td>
 						<td><textarea rows="5" cols="100" name="ac"></textarea></td>
 					</tr>
-				
+
 				</table>
 
 			</div>
-						<input type="hidden" name="dname" value=<%=docname%>>
-						<input type="hidden" name="email" value=<%=email%>>
+			<input type="hidden" name="dname" value=<%=docname%>> <input
+				type="hidden" name="email" value=<%=email%>>
 			<div class="centered">
 				<input type="submit" value="SUBMIT" class="submit">
 			</div>
