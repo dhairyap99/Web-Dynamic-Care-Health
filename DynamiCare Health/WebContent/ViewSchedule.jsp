@@ -95,7 +95,7 @@ st=con.createStatement();
 rs=st.executeQuery("SELECT booking.bookingid,users.fname,users.lname,booking.date,booking.time,booking.reason,users.uname "
 		+"FROM `booking` INNER JOIN `users` "
 		+"ON booking.pname=users.uname "
-		+"WHERE booking.dname='"+uname+"' and booking.date>DATE_SUB(NOW(),INTERVAL 1 DAY) and booking.date<DATE_ADD(NOW(),INTERVAL 1 MONTH) and booking.time>NOW() "
+		+"WHERE booking.dname='"+uname+"' and booking.date>DATE_SUB(NOW(),INTERVAL 1 DAY) and booking.date<DATE_ADD(NOW(),INTERVAL 1 MONTH) "
 		+"and booking.status=1 AND booking.diagnosed=false "
 		+"ORDER BY booking.date,booking.time");
 while(rs.next()){
