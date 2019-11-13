@@ -58,7 +58,7 @@ form {
 	background: #eb1736;
 	border-radius: 30px;
 	font-size: 20px;
-	font-family: Verdana;;
+	font-family: Verdana;
 	font-weight: bold;
 	height: 100px;
 	width: 260px;

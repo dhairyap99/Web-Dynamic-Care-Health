@@ -14,6 +14,12 @@
         $('#myModal').modal('show');
     });
 </script>
+<style type="text/css">
+body {
+	font-family: Verdana;
+	font-size:20px;
+}
+</style>
 <title>Cancel Appointment</title>
 </head>
 <body>
@@ -30,7 +36,7 @@ session.setAttribute("user", uname);
 				<div class="modal-body no-border">
 					<form action="AppointmentCan2.jsp" action="get">
 						<input type="hidden" name="b" value=<%=request.getParameter("bid")%>> 
-						Are You Sure?    
+						Are You Sure? &nbsp;&nbsp;&nbsp;  
 						<input type="submit" value="YES">
 					</form>
 

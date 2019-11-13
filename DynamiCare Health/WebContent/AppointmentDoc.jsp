@@ -41,6 +41,7 @@ a {
 if (session.getAttribute("msg")!=null){
 	String message=session.getAttribute("msg").toString();
 	out.println("<script>alert(\""+message+"\")</script>");
+	session.removeAttribute("msg");
 }
 %>
 	<h2 style="font-family: verdana">Confirm Appointment</h2>

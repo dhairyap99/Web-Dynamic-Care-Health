@@ -27,6 +27,15 @@
         $('#myModal').modal('show');
     });
 </script>
+<style>
+body {
+	font-family: Verdana;
+}
+
+.submit{
+	font-size:20px;
+}
+</style>
 <title>Reschedule Appointment</title>
 </head>
 <body>
@@ -69,32 +78,23 @@ max=sdf.format(c.getTime());
 				</div>
 				<div class="modal-body no-border">
 					<form action="AppointmentResch2.jsp" action="get">
-					<table cellpadding="6">
-					<tr>
-						<td> Enter Date:</td>
-						<td><input type="date" name="d" min=<%= date %> max=<%= max %>></td>
-					</tr>
-					<tr>
-					<td>Time Slots:</td>
-					<td>Morning (9:00 AM to 12:00 PM)</td><td></td><td></td>
-					<td>Afternoon (12:00 PM to 4:00 PM)</td>
-					</tr>
-					<tr>
-					<td></td>
-					<td>Evening (4:00 PM to 7:00 PM)</td><td></td><td></td>
-					<td>Night (7:00 PM to 11:00 PM)</td>
-					</tr>
-					<tr>
-						<td>Preferred Time:</td>
-						<% for (String x:shifts){%>							
-						<td><input type="radio" name="t" value=<%= x %>><%= x %></td>							
-							<%}%>
-					</tr>
+						<b>Enter Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b>
+						<input type="date" name="d" min=<%= date %> max=<%= max %>><br><br>
 					
-					</table>
+					<b>Time Slots&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b>
+					Morning (9:00 AM to 12:00 PM)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					Afternoon (12:00 PM to 4:00 PM)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					Evening (4:00 PM to 7:00 PM)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					Night (7:00 PM to 11:00 PM)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br>
+					
+					<b>Preferred Time&nbsp;&nbsp;&nbsp;:</b>
+						<% for (String x:shifts){%>							
+						<input type="radio" name="t" value=<%= x %>>&nbsp;<%= x %>&nbsp;&nbsp;&nbsp;							
+							<%}%>
+					
 						<input type="hidden" name="b" value=<%=request.getParameter("bid")%>>  
 						 
-						<input type="submit" value="Submit">
+						<br><center><input type="submit" class="submit" value="SUBMIT"></center>
 					</form>
 
 				</div>

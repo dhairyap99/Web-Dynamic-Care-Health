@@ -159,6 +159,7 @@ a {
 		if (session.getAttribute("msg") != null) {
 			String message = session.getAttribute("msg").toString();
 			out.println("<script>alert(\"" + message + "\")</script>");
+			session.removeAttribute("msg");
 		}
 	%>
 	<center>
