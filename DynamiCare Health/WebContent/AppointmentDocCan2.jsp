@@ -9,9 +9,9 @@
 <!DOCTYPE html>
 <%!Connection con;
 	Statement st,st1,st2,st3,st4,st5,st6;
-	ResultSet rs,rs1,rs2,rs3,rs4;
+	ResultSet rs,rs1,rs3,rs4;
 	int row;
-	String u,mail,subject,msg,df,dl,bid,dmail,dmsg,pf,pl,d;
+	String u,mail,subject,msg,df,dl,bid,dmail,dmsg,pf,pl,p;
 	float pbalance,dbalance,charges;
 	StringBuffer otp;%>
 <html>
@@ -29,28 +29,28 @@ try {
 	st = con.createStatement();
 	rs=st.executeQuery("SELECT `fname`,`lname`,`mail` FROM `users` WHERE `uname`='"+u+"'");
 	while(rs.next()){
-		pf=rs.getString(1);
-		pl=rs.getString(2);
-		mail=rs.getString(3);
+		df=rs.getString(1);
+		dl=rs.getString(2);
+		dmail=rs.getString(3);
 	}
 	
 	st1=con.createStatement();
 	rs1=st1.executeQuery("SELECT users.fname,users.lname,users.mail,users.uname "
 			+"from users INNER JOIN booking "
-			+"ON users.uname=booking.dname "
+			+"ON users.uname=booking.pname "
 			+"where booking.bookingid='"+bid+"'");
 	while(rs1.next()){
-		df=rs1.getString(1);
-		dl=rs1.getString(2);
-		dmail=rs1.getString(3);
-		d=rs1.getString(4);
+		pf=rs1.getString(1);
+		pl=rs1.getString(2);
+		mail=rs1.getString(3);
+		p=rs1.getString(4);
 	}
 	
 	st2=con.createStatement();
 	row=st2.executeUpdate("UPDATE `booking` SET `status`=-1 WHERE `bookingid`='"+bid+"'");
 	
 	st3=con.createStatement();
-	rs3=st3.executeQuery("SELECT `money` FROM `wallet` WHERE `username`='"+u+"'");
+	rs3=st3.executeQuery("SELECT `money` FROM `wallet` WHERE `username`='"+p+"'");
 	while(rs3.next()){
 		pbalance=Float.valueOf(rs3.getString(1));
 	}
@@ -59,7 +59,7 @@ try {
 	rs4=st4.executeQuery("SELECT wallet.money,doctordetails.charges "
 			+"FROM doctordetails INNER JOIN wallet "
 			+"ON doctordetails.username=wallet.username "
-			+"WHERE doctordetails.username='"+d+"'");
+			+"WHERE doctordetails.username='"+u+"'");
 	while(rs4.next()){
 		dbalance=Float.valueOf(rs4.getString(1));
 		charges=Float.valueOf(rs4.getString(2));
@@ -69,27 +69,25 @@ try {
 	pbalance=pbalance+charges;
 	
 	st5=con.createStatement();
-	int row1 = st5.executeUpdate("UPDATE `wallet` SET `money`=" + pbalance + " WHERE `username`='" + u + "'");
+	int row1 = st5.executeUpdate("UPDATE `wallet` SET `money`=" + pbalance + " WHERE `username`='" + p + "'");
 	
 	st6=con.createStatement();
-	int row2 = st6.executeUpdate("UPDATE `wallet` SET `money`=" + dbalance + " WHERE `username`='" + d + "'");
-	
+	int row2 = st6.executeUpdate("UPDATE `wallet` SET `money`=" + dbalance + " WHERE `username`='" + u + "'");
+
 }
 catch(Exception e){
 	out.println(e);
 }
 
 subject="Appointment Cancelled";
-msg="You have cancelled appointment with Dr. "+df+" "+dl+". (Booking ID: "+bid+")";
+
+msg="Sorry to inform you that your appointment with Dr. "+df+" "+dl+" has been cancelled. (Booking ID: "+bid+")";
 msg+="\nRs. "+charges+" has been refunded to your account.";
 Mailer.send(mail,subject,msg);
 
-dmsg="Sorry to inform you that your appointment with "+pf+" "+pl+" has been cancelled. (Booking ID: "+bid+")";
-Mailer.send(dmail,subject,dmsg);
-
 session.setAttribute("user",u);
 session.setAttribute("msg",subject);
-response.sendRedirect("HomePagePatient.jsp");
+response.sendRedirect("HomePageDoctor.jsp");
 %>
 
 </body>
