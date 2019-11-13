@@ -8,7 +8,6 @@
 <%@page import="javax.servlet.ServletException"%>
 <%@page import="javax.servlet.annotation.WebServlet" %>
 <%@page import="javax.servlet.http.HttpServlet" %>
-<%@page import="net.io.mail.Mailer" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%!Connection con2;

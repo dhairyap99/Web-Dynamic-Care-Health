@@ -2,6 +2,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
+<%@page import="java.text.SimpleDateFormat" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@page import="net.io.mail.Mailer"%>
@@ -11,7 +12,7 @@
 	Statement st,st1,st2,st3,st4,st5,st6;
 	ResultSet rs,rs1,rs2,rs3,rs4;
 	int row;
-	String u,mail,subject,msg,df,dl,bid,dmail,dmsg,pf,pl,d;
+	String u,mail,subject,msg,df,dl,bid,dmail,dmsg,pf,pl,d,date,time,bdate,btime;
 	float pbalance,dbalance,charges;
 	StringBuffer otp;%>
 <html>
@@ -35,7 +36,7 @@ try {
 	}
 	
 	st1=con.createStatement();
-	rs1=st1.executeQuery("SELECT users.fname,users.lname,users.mail,users.uname "
+	rs1=st1.executeQuery("SELECT users.fname,users.lname,users.mail,users.uname,booking.date,booking.time "
 			+"from users INNER JOIN booking "
 			+"ON users.uname=booking.dname "
 			+"where booking.bookingid='"+bid+"'");
@@ -44,6 +45,8 @@ try {
 		dl=rs1.getString(2);
 		dmail=rs1.getString(3);
 		d=rs1.getString(4);
+		date=rs1.getString(5);
+		time=rs1.getString(6);
 	}
 	
 	st2=con.createStatement();
@@ -79,12 +82,20 @@ catch(Exception e){
 	out.println(e);
 }
 
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+SimpleDateFormat formatter = new SimpleDateFormat("MMM dd, yyyy");
+SimpleDateFormat sd = new SimpleDateFormat("HH:mm:ss");
+SimpleDateFormat formatter1 = new SimpleDateFormat("KK:mm a");
+
+bdate=formatter.format(sdf.parse(date));
+btime=formatter1.format(sd.parse(time));
+
 subject="Appointment Cancelled";
-msg="You have cancelled appointment with Dr. "+df+" "+dl+". (Booking ID: "+bid+")";
+msg="You have cancelled appointment with Dr. "+df+" "+dl+", dated "+bdate+" at "+btime+". (Booking ID: "+bid+")";
 msg+="\nRs. "+charges+" has been refunded to your account.";
 Mailer.send(mail,subject,msg);
 
-dmsg="Sorry to inform you that your appointment with "+pf+" "+pl+" has been cancelled. (Booking ID: "+bid+")";
+dmsg="Sorry to inform you that your appointment, dated "+bdate+" at "+btime+" with "+pf+" "+pl+" has been cancelled. (Booking ID: "+bid+")";
 Mailer.send(dmail,subject,dmsg);
 
 session.setAttribute("user",u);

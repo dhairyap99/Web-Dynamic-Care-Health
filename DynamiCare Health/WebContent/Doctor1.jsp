@@ -74,6 +74,7 @@ try{
 	
 	if (pass.equals(cpass)){
 		int row=st.executeUpdate("insert into users values('"+first+"','"+last+"','"+email+"','"+user+"','"+pass+"','Doctor')");
+		int row1=st.executeUpdate("INSERT INTO `wallet`(`username`, `money`) VALUES ('"+user+"',1000)");
 		String subject="Welcome to DynamiCare Health Community";
 				String msg="Congrats Dr. "+first+" "+last+"\n"+"You have been successfully enrolled to DynamiCare Health Community";
 				Mailer.send(email, subject, msg); %>
