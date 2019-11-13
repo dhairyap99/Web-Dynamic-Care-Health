@@ -92,7 +92,7 @@ st=con.createStatement();
 rs=st.executeQuery("SELECT booking.bookingid,users.fname,users.lname,booking.date,booking.time,booking.status,doctordetails.location "
 		+"FROM `booking` INNER JOIN `users` INNER JOIN `doctordetails` "
 		+"ON booking.dname=users.uname and booking.dname=doctordetails.username "
-		+"WHERE booking.pname='"+uname+"'and booking.date>'"+today+"' and booking.status=1 "
+		+"WHERE booking.pname='"+uname+"'and booking.date>DATE_SUB(NOW(),INTERVAL 1 DAY) and booking.status=1 "
 		+"ORDER BY booking.date");
 while(rs.next()){
 	out.println("<tr>");

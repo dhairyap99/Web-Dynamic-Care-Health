@@ -85,7 +85,7 @@ rs=st.executeQuery("SELECT booking.bookingid,users.fname,users.lname,booking.dat
 		+"doctordetails.location "
 		+"FROM `booking` INNER JOIN `users` INNER JOIN `doctordetails` "
 		+"ON booking.dname=users.uname and booking.dname=doctordetails.username "
-		+"WHERE booking.pname='"+uname+"' "
+		+"WHERE booking.pname='"+uname+"' and booking.date>DATE_SUB(NOW(),INTERVAL 1 DAY) "
 		+"ORDER BY booking.date");
 while(rs.next()){
 	out.println("<tr>");

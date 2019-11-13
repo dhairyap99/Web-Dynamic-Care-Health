@@ -171,10 +171,10 @@ img {
 				out.println("</table>");
 	%>
 	<button class="button" type="button" value="CONFIRM"
-		style="position: absolute; top: 100px; left: 1050px;" id="confirm"
+		style="position: absolute; top: 100px; left: 1090px;" id="confirm"
 		data-toggle="modal" data-target="#myModal">CONFIRM</button>
 	<button class="button" type="button" value="CANCEL"
-		style="position: absolute; top: 420px; left: 1050px;"
+		style="position: absolute; top: 420px; left: 1090px;"
 		data-toggle="modal" data-target="#myModal1" id="cancel">CANCEL</button>
 
 

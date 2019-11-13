@@ -158,12 +158,13 @@ img {
 %>
 
 <button class="button" type="button" value="VIEW" onclick="location.href='ViewDiagnosis.jsp?u=<%=username%>'"
-		style="position: absolute; top: 100px; left: 1050px;" 
+		style="position: absolute; top: 470px; left: 500px;" 
 		id="view">VIEW DIAGNOSIS</button>
 <button class="button" type="button" value="VIEW" onclick="location.href='Diagnose.jsp?u=<%=username%>&bid=<%= bid %>'"
-		style="position: absolute; top: 420px; left: 1050px;" 
+		style="position: absolute; top: 470px; left: 775px;" 
 		id="view">DIAGNOSE</button>
-		
-
+<button class="button" type="button" value="VIEW" onclick="location.href='ViewContacts.jsp?u=<%=username%>'"
+		style="position: absolute; top: 470px; left: 1050px;" 
+		id="view">VIEW CONTACTS</button>
 </body>
 </html>
