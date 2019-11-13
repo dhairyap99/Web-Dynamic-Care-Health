@@ -48,7 +48,8 @@ a {
 				st = con.createStatement();
 
 				rs = st.executeQuery(
-						"SELECT users.fname,users.lname,doctordetails.sex,doctordetails.username FROM `users` INNER JOIN `doctordetails` "
+						"SELECT users.fname,users.lname,doctordetails.sex,doctordetails.username,doctordetails.verified "
+						+"FROM `users` INNER JOIN `doctordetails` "
 								+ "ON users.uname = doctordetails.username WHERE doctordetails.specification='" + type
 								+ "'");
 
@@ -66,6 +67,10 @@ a {
  				out.println("<img src='images/doctorFemale.png' class='profile'/>");
  			}
  %>
+ <% if (rs.getString(5).equals("1")){
+			out.println("<img src=\"images/verified.png\" style=\"height:35px;position:relative;right:50px;z-index:1;\"/>");
+			}%>
+		
 			</a>
 		</div>
 		<%

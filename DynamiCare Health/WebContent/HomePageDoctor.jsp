@@ -7,7 +7,7 @@
 <%!Connection con2;
 Statement st2;
 ResultSet rs2;
-String us,se,ag,p,sp;
+String us,se,ag,p,sp,v;
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -134,13 +134,14 @@ if (session.getAttribute("msg")!=null){
 	
 	us=session.getAttribute("user").toString();
 	
-	rs2=st2.executeQuery("SELECT `sex`,`age`,`phone`,`specification` FROM `doctordetails` WHERE `username`='"+us+"'");
+	rs2=st2.executeQuery("SELECT `sex`,`age`,`phone`,`specification`,`verified` FROM `doctordetails` WHERE `username`='"+us+"'");
 	
 	while(rs2.next()){
 		se=rs2.getString(1);
 		ag=rs2.getString(2);
 		p=rs2.getString(3);
 		sp=rs2.getString(4);
+		v=rs2.getString(5);
 	}
 }
 catch(Exception e){
@@ -157,6 +158,10 @@ catch(Exception e){
 
 	<div id="userdetails">
 		<center>
+		<% if (v.equals("1")){
+			out.println("<img src=\"images/verified.png\" style=\"height:35px;position:absolute;right:230px;top:85px;z-index:1;\"/>");
+			}%>
+		
 			<% if (se.equals("Male")){ 
 			out.println("<img src='images/doctorMale.png' class='profile'/>");
 		}
