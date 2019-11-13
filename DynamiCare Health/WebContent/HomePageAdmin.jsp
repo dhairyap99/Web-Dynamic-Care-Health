@@ -98,7 +98,7 @@ if (session.getAttribute("msg")!=null){
 
 				st = con.createStatement();
 
-				rs = st.executeQuery("SELECT `doctordetails`.`username`,`doctordetails`.`sex`,`users`.`fname`,`users`.`lname` "
+				rs = st.executeQuery("SELECT `doctordetails`.`username`,`doctordetails`.`sex`,`users`.`fname`,`users`.`lname`,`doctordetails`.`specification` "
 						+"FROM `doctordetails` INNER JOIN `users` "
 						+"ON `doctordetails`.`username`=`users`.`uname` "
 						+"WHERE `doctordetails`.verified=false "
@@ -116,7 +116,8 @@ if (session.getAttribute("msg")!=null){
 		}
 		else{
 			out.println("<img src='images/doctorFemale.png' class='profile'/>");
-		}%>
+		}%>	
+			<p style="font-style: oblique; font-size: 0.7em;color:black;"><%= rs.getString(5) %></p>
 			</a>
 		</div>
 		<%}
