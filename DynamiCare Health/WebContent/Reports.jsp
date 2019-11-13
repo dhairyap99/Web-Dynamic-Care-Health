@@ -30,6 +30,7 @@ ResultSet rs;%>
 	font-size: 30px;
 	border: 1px solid black;
 	border-radius: 25px;
+	font-weight:bold;
 }
 a {
 	text-decoration: none;
@@ -52,7 +53,9 @@ a {
 
 				st = con.createStatement();
 
-				rs = st.executeQuery("SELECT `bookingid`,`date` FROM `booking` WHERE `pname`='"+uname+"' and `diagnosed`=true order by `date`");
+				rs = st.executeQuery("SELECT `bookingid`,`date` FROM `booking` "
+						+"WHERE `pname`='"+uname+"' and `diagnosed`=true "
+						+"order by `date`");
 				while (rs.next()) {
 		%>
 		<div>

@@ -60,7 +60,9 @@ if (session.getAttribute("msg")!=null){
 						+ "ON booking.pname=users.uname and booking.pname=patientdetails.username "
 						+ "WHERE booking.`dname`='"+docname+"' and booking.status=0 "
 						+ "order by booking.date;");
+				boolean empty=true;
 				while (rs.next()) {
+					empty=false;
 		%>
 		<div>
 			<a href=<%="\"ShowProfilePatient.jsp?uname=" + rs.getString(1) + "&bid="+rs.getString(6)+"\""%>>
@@ -78,6 +80,12 @@ if (session.getAttribute("msg")!=null){
 			<p style="font-style: oblique; font-size: 0.7em"><%= rs.getString(5) %></p>
 		</div>
 		<%}
+				if (empty){
+					String redirectURL = "/DynamiCare_Health/HomePageDoctor.jsp";
+					session.setAttribute("user",docname);
+					session.setAttribute("msg","No Pending Appointments");
+				    response.sendRedirect(redirectURL);				    
+				}
 			} catch (Exception e) {
 				out.println(e);
 			}
