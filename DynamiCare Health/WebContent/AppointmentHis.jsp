@@ -85,7 +85,7 @@ table {
 							+ "FROM `booking` INNER JOIN `users` INNER JOIN `doctordetails` "
 							+ "ON booking.dname=users.uname and booking.dname=doctordetails.username "
 							+ "WHERE booking.pname='" + uname
-							+ "' and booking.date>DATE_SUB(NOW(),INTERVAL 1 DAY) and booking.status=1 "
+							+ "' and booking.date<NOW() and booking.status=1 "
 							+ "ORDER BY booking.date");
 			while (rs.next()) {
 				out.println("<tr>");
