@@ -15,11 +15,17 @@
         $('#myModal').modal('show');
     });
 </script>
+<style>
+body {
+	font-family: Verdana;
+	font-size:20px;
+}
+</style>
 <title>Forgot Password</title>
 </head>
 <body>
 <div class="modal fade" id="myModal" role="dialog">
-		<div class="modal-dialog">
+		<div class="modal-dialog" style="width:1000px">
 			<div class="modal-content">
 				<div class="modal-header" style="background: #eb1736; color: white;">
 					<h4 class="modal-title">Enter User Name:</h4>
@@ -27,8 +33,7 @@
 				<div class="modal-body no-border">
 					<form action="ForgotPassword1.jsp" method="get">
 						<input type="text" size="60px;" name="uname"></input>
-						<input
-							type="submit" value="SUBMIT">
+						<input type="submit" value="SUBMIT">
 					</form>
 				</div>
 				<div class="modal-footer no-border">

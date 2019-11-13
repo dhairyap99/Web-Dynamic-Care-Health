@@ -14,6 +14,12 @@
         $('#myModal').modal('show');
     });
 </script>
+<style>
+body {
+	font-family: Verdana;
+	font-size:20px;
+}
+</style>
 <title>Forgot Password</title>
 </head>
 <body>
@@ -22,7 +28,7 @@ session.setAttribute("uname",session.getAttribute("uname"));
 session.setAttribute("otp",session.getAttribute("otp"));
 %>
 <div class="modal fade" id="myModal" role="dialog">
-		<div class="modal-dialog">
+		<div class="modal-dialog" style="width:1000px">
 			<div class="modal-content">
 				<div class="modal-header" style="background: #eb1736; color: white;">
 					<h4 class="modal-title">Enter OTP: </h4>
