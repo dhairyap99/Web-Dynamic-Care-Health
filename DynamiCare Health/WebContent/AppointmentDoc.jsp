@@ -58,7 +58,7 @@ if (session.getAttribute("msg")!=null){
 				rs = st.executeQuery("SELECT users.uname,users.fname,users.lname,patientdetails.sex,booking.date,booking.bookingid "
 						+ "FROM `booking` JOIN `users` JOIN `patientdetails` "
 						+ "ON booking.pname=users.uname and booking.pname=patientdetails.username "
-						+ "WHERE booking.`dname`='"+docname+"' and booking.status=0 "
+						+ "WHERE booking.`dname`='"+docname+"' and booking.status=0 and booking.date>DATE_SUB(NOW(),INTERVAL 1 DAY) "
 						+ "order by booking.date;");
 				boolean empty=true;
 				while (rs.next()) {

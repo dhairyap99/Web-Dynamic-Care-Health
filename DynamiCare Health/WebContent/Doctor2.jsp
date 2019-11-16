@@ -36,12 +36,13 @@ String shifts;
 	exp=request.getParameter("exp");
 	ch=request.getParameter("cha");
 	
+	out.println(pname);
 	sh = request.getParameterValues("shift");
 	if (sh != null && sh.length != 0) {
 		shifts=Arrays.asList(sh).toString().substring(1).replace("]", "");
 	}
-
-	int row=st.executeUpdate("insert into doctordetails values('"+pname+"','"+sex+"','"+age+"','"+ph+"','"+edu+"','"+spec+"','"+loc+"','"
+	
+	int row=st.executeUpdate("INSERT INTO `doctordetails`(`username`, `sex`, `age`, `phone`, `education`, `specification`, `location`, `experience`, `charges`, `shifts`) VALUES('"+pname+"','"+sex+"','"+age+"','"+ph+"','"+edu+"','"+spec+"','"+loc+"','"
 	+exp+"','"+ch+"','"+shifts+"')");
 			
 	st.close();

@@ -97,7 +97,7 @@ try {
 	}
 	
 	if (!today.equals(date)){
-		session.setAttribute("msg","You cannot diagnose before Booking Date");
+		session.setAttribute("msg","Cannot diagnose before Booking Date");
 		session.setAttribute("user",docname);
 		String redirectURL = "/DynamiCare_Health/HomePageDoctor.jsp";
 		response.sendRedirect(redirectURL);
